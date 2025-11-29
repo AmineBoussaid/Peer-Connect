@@ -1,0 +1,16 @@
+.dashboard {
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.btn {
+  display: block;
+  background: #28a745;
+  padding: 15px;
+  color: white;
+  margin: 10px 0;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 18px;
+}

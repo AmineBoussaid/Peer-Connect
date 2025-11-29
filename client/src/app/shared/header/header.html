@@ -1,0 +1,38 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo">
+      <h2>PeerConnect</h2>
+    </div>
+
+    <ul class="nav-menu">
+      <!-- AUTEUR -->
+      <ng-container *ngIf="role === 'auteur'">
+        <li><span class="menu-title">Espace Auteur</span></li>
+        <li><a routerLink="/auteur" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Acceuille</a></li>
+        <li><a routerLink="/auteur/submit-article" routerLinkActive="active">Soumettre un article</a></li>
+        <li><a routerLink="/auteur/my-articles" routerLinkActive="active">Mes articles</a></li>
+      </ng-container>
+
+      <!-- EXPERT -->
+      <ng-container *ngIf="role === 'expert'">
+        <li><span class="menu-title">Espace Expert</span></li>
+        <li><a routerLink="/expert" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Acceuille</a></li>
+        <li><a routerLink="/expert/assignments" routerLinkActive="active">Mes Assignations</a></li>
+        <li><a routerLink="/expert/submit-review" routerLinkActive="active">Soumettre un review</a></li>
+      </ng-container>
+
+      <!-- ADMIN -->
+      <ng-container *ngIf="role === 'admin'">
+        <li><span class="menu-title">Espace Administrateur</span></li>
+        <li><a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Acceuille</a></li>
+        <li><a routerLink="/admin/manage-experts" routerLinkActive="active">Gérer les experts</a></li>
+        <li><a routerLink="/admin/workflow" routerLinkActive="active">Workflow articles</a></li>
+      </ng-container>
+    </ul>
+
+    <div class="nav-actions">
+      <span class="user-role" *ngIf="role">{{ role | titlecase }}</span>
+      <button class="logout-btn" (click)="logout()">Déconnexion</button>
+    </div>
+  </div>
+</nav>
