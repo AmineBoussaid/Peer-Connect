@@ -1,1 +1,264 @@
-<p>my-articles works!</p>
+<div class="min-h-screen bg-slate-50 py-8 px-4">
+	<div class="app-container">
+		<div class="mb-6">
+			<h1 class="text-2xl font-semibold text-slate-900 mb-1">Mes Articles</h1>
+			<p class="text-slate-600 text-sm">Créez, gérez et soumettez vos articles pour révision par les pairs</p>
+		</div>
+
+		<div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+			<div class="card card-body">
+				<p class="text-2xl font-semibold text-emerald-600">{{ getTotalArticles() }}</p>
+				<p class="text-xs font-semibold uppercase text-slate-600 mt-1">Total articles</p>
+			</div>
+			<div class="card card-body">
+				<p class="text-2xl font-semibold text-purple-600">{{ getArticlesWithPdf() }}</p>
+				<p class="text-xs font-semibold uppercase text-slate-600 mt-1">Avec PDF</p>
+			</div>
+		</div>
+
+		<div class="card card-body mb-6">
+			<div class="flex items-center justify-between mb-5">
+				<h2 class="text-lg font-semibold text-slate-900">{{ editingId ? '✏️ Modifier l\'article' : '➕ Nouvel article' }}</h2>
+				<button type="button" class="btn btn-ghost text-slate-700" (click)="showFormModal = !showFormModal">
+					{{ showFormModal ? 'Fermer' : 'Créer' }}
+				</button>
+			</div>
+
+			<form (ngSubmit)="submit()" *ngIf="showFormModal" class="space-y-5">
+				<div>
+					<label class="block text-sm font-semibold text-slate-900 mb-2">Titre *</label>
+					<input type="text" [(ngModel)]="form.titre" name="titre" required placeholder="Titre de l'article" class="input" />
+				</div>
+
+				<div>
+					<label class="block text-sm font-semibold text-slate-900 mb-2">Résumé</label>
+					<textarea [(ngModel)]="form.resume" name="resume" rows="4" placeholder="Résumé de l'article" class="textarea"></textarea>
+				</div>
+
+				<div>
+					<label class="block text-sm font-semibold text-slate-900 mb-2">Mots clés</label>
+					<input type="text" [(ngModel)]="keywordSearch" (ngModelChange)="filterKeywords()" name="keywordSearch" placeholder="Rechercher des mots-clés..." class="input mb-3" />
+					<div class="flex flex-wrap gap-2 mb-3" *ngIf="form.mots_cles.length > 0">
+						<span class="badge badge-success" *ngFor="let kw of form.mots_cles">
+							{{ kw }}
+							<button type="button" class="ml-2" (click)="toggleKeyword(kw)">×</button>
+						</span>
+					</div>
+					<div class="flex flex-wrap gap-2">
+						<button type="button" 
+										*ngFor="let kw of filteredKeywords" 
+										class="px-3 py-1.5 rounded-lg border text-sm font-medium transition-colors"
+										[class]="isKeywordSelected(kw) 
+											? 'bg-primary-50 border-primary-300 text-primary-700' 
+											: 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'"
+										(click)="toggleKeyword(kw)">
+							{{ kw }}
+							<span *ngIf="isKeywordSelected(kw)" class="ml-1">✓</span>
+						</button>
+					</div>
+				</div>
+
+				<div>
+					<label class="block text-sm font-semibold text-slate-900 mb-2">Fichier PDF {{ editingId ? '(optionnel)' : '' }}</label>
+					<div *ngIf="editingId && form.fichier_pdf" class="mb-3 p-3 bg-sky-50 border border-sky-200 rounded-lg text-sm text-sky-800">
+						<span class="font-medium">PDF actuel :</span> 
+						<a [href]="getPdfUrl(form.fichier_pdf)" target="_blank" class="text-sky-600 hover:text-sky-700 underline ml-1">📎 Voir</a>
+					</div>
+					<input type="file" (change)="onFileSelected($event)" accept=".pdf" class="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700" />
+					<small class="text-slate-600 mt-2" *ngIf="selectedFile">{{ selectedFile.name }}</small>
+				</div>
+
+				<div class="flex gap-3 justify-end pt-4 border-t border-slate-200">
+					<button type="button" class="btn btn-ghost" (click)="cancel()">Annuler</button>
+					<button type="submit" class="btn btn-primary">{{ editingId ? 'Mettre à jour' : 'Créer' }}</button>
+				</div>
+			</form>
+		</div>
+
+		<div class="card card-body mb-4">
+			<h2 class="text-lg font-semibold text-slate-900 mb-4">Liste de mes articles</h2>
+			<div class="grid grid-cols-1 md:grid-cols-5 gap-3 items-center">
+				<input type="text" 
+							 [(ngModel)]="searchTerm" 
+							 (ngModelChange)="applyFilters()"
+							 placeholder="🔍 Rechercher..."
+							 class="input" />
+				<select [(ngModel)]="sortBy" (ngModelChange)="applyFilters()" class="select">
+					<option value="date">Trier par date</option>
+					<option value="title">Trier par titre</option>
+				</select>
+				<select [ngModel]="pageSize" (ngModelChange)="changePageSize($event)" class="select">
+					<option [ngValue]="5">5 / page</option>
+					<option [ngValue]="10">10 / page</option>
+					<option [ngValue]="20">20 / page</option>
+				</select>
+				<div class="flex gap-2 md:col-span-2 md:col-start-4">
+					<button (click)="viewMode = 'cards'" [class]="viewMode === 'cards' ? 'flex-1 btn btn-primary' : 'flex-1 btn btn-ghost'" title="Vue cartes">⊞ Cartes</button>
+					<button (click)="viewMode = 'table'" [class]="viewMode === 'table' ? 'flex-1 btn btn-primary' : 'flex-1 btn btn-ghost'" title="Vue tableau">☰ Tableau</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- One-row cards list with pagination -->
+		<div class="space-y-3" *ngIf="viewMode === 'cards' && filteredArticles.length > 0">
+			<div class="card card-body hover:shadow-soft transition-all" *ngFor="let a of paginatedFilteredArticles">
+				<div class="flex items-center justify-between gap-3">
+					<div class="flex-1 min-w-0">
+						<h3 class="text-base font-semibold text-slate-900">{{ a.titre }}</h3>
+						<div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-600 mt-1">
+							<span>📅 {{ a.date_soumission | date:'dd/MM/yyyy' }}</span>
+							<span *ngIf="a.mots_cles">🏷️ {{ a.mots_cles }}</span>
+							  <span *ngIf="getArticleRating(a.id_article) !== null">⭐ {{ to10(getArticleRating(a.id_article)) | number:'1.1-1' }}/10 <span class="text-xs text-slate-500">(note globale moyenne)</span></span>
+							<span *ngIf="getAssignationsForArticle(a.id_article).length > 0" class="badge badge-info text-xs">{{ getAssignationsForArticle(a.id_article).length }}</span>
+						</div>
+					</div>
+					<div class="flex items-center gap-2 shrink-0">
+						<a *ngIf="a.fichier_pdf" [href]="getPdfUrl(a.fichier_pdf)" target="_blank" class="text-primary-600 hover:text-primary-700 font-medium text-sm">PDF</a>
+						<button class="btn btn-ghost text-sm py-1.5" (click)="edit(a)" title="Modifier">✏️</button>
+						<button class="btn btn-ghost text-sm py-1.5" (click)="showArticleHistory(a)" title="Historique">📋</button>
+						<button class="btn btn-danger text-sm py-1.5" (click)="remove(a)" title="Supprimer">🗑️</button>
+					</div>
+				</div>
+			</div>
+			<!-- Pagination controls for cards -->
+			<div class="flex items-center justify-between pt-4 border-t border-slate-200" *ngIf="totalPages > 1">
+				<button class="btn btn-ghost text-sm" (click)="prevPage()" [disabled]="page === 1">← Précédent</button>
+				<span class="text-sm text-slate-600">Page {{ page }} sur {{ totalPages }} ({{ filteredArticles.length }} article(s))</span>
+				<button class="btn btn-ghost text-sm" (click)="nextPage()" [disabled]="page === totalPages">Suivant →</button>
+			</div>
+		</div>
+
+		<div class="table-wrap" *ngIf="viewMode === 'table' && filteredArticles.length > 0">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Titre</th>
+						<th>Mots-clés</th>
+						<th>Date</th>
+						<th>Note</th>
+						<th>PDF</th>
+						<th>Assignations</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let a of paginatedFilteredArticles" class="hover:bg-slate-50 transition-colors">
+						<td>
+							<div class="font-semibold text-slate-900">{{ a.titre }}</div>
+							<div class="text-xs text-slate-500 mt-1" *ngIf="a.resume">{{ a.resume.substring(0, 60) }}{{ a.resume.length > 60 ? '...' : '' }}</div>
+						</td>
+						<td class="text-slate-600">{{ a.mots_cles || '-' }}</td>
+						<td class="text-slate-600">{{ a.date_soumission | date:'dd/MM/yyyy' }}</td>
+						<td>
+							  <span *ngIf="getArticleRating(a.id_article) !== null" class="badge badge-success">⭐ {{ to10(getArticleRating(a.id_article)) | number:'1.1-1' }}/10</span>
+							<span *ngIf="getArticleRating(a.id_article) === null" class="text-slate-400">-</span>
+						</td>
+						<td>
+							<a *ngIf="a.fichier_pdf" [href]="getPdfUrl(a.fichier_pdf)" target="_blank" class="text-primary-600 hover:text-primary-700">📎</a>
+							<span *ngIf="!a.fichier_pdf" class="text-slate-400">-</span>
+						</td>
+						<td>
+							<span *ngIf="getAssignationsForArticle(a.id_article).length > 0" class="badge badge-info">
+								{{ getAssignationsForArticle(a.id_article).length }}
+							</span>
+							<span *ngIf="getAssignationsForArticle(a.id_article).length === 0" class="text-slate-400">-</span>
+						</td>
+						<td>
+							<div class="flex gap-3">
+								<button class="text-sky-600 hover:text-sky-900" (click)="edit(a)" title="Modifier">✏️</button>
+								<button class="text-purple-600 hover:text-purple-900" (click)="showArticleHistory(a)" title="Historique">📋</button>
+								<button class="text-red-600 hover:text-red-900" (click)="remove(a)" title="Supprimer">🗑️</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="flex items-center justify-between pt-4 border-t border-slate-200" *ngIf="totalPages > 1">
+				<button class="btn btn-ghost text-sm" (click)="prevPage()" [disabled]="page === 1">← Précédent</button>
+				<span class="text-sm text-slate-600">Page {{ page }} sur {{ totalPages }} ({{ filteredArticles.length }} article(s))</span>
+				<button class="btn btn-ghost text-sm" (click)="nextPage()" [disabled]="page === totalPages">Suivant →</button>
+			</div>
+		</div>
+
+		<div *ngIf="filteredArticles.length === 0 && articles.length > 0" class="card card-body text-center py-12">
+			<svg class="mx-auto h-12 w-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+			</svg>
+			<h3 class="mt-3 text-sm font-semibold text-slate-900">Aucun résultat</h3>
+			<p class="mt-1 text-sm text-slate-600">Aucun article ne correspond aux critères de recherche.</p>
+		</div>
+
+		<div *ngIf="articles.length === 0" class="card card-body text-center py-12">
+			<svg class="mx-auto h-12 w-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+			</svg>
+			<h3 class="mt-3 text-sm font-semibold text-slate-900">Aucun article</h3>
+			<p class="mt-1 text-sm text-slate-600">Cliquez sur "Créer" pour commencer.</p>
+		</div>
+	</div>
+
+	<!-- History modal -->
+	<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" *ngIf="selectedArticleForHistory" (click)="closeHistory()">
+		<div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full" (click)="$event.stopPropagation()">
+			<div class="flex items-center justify-between p-6 border-b border-slate-200 bg-gradient-to-r from-purple-50 to-sky-50">
+				<h2 class="text-xl font-semibold text-slate-900">📋 Historique : {{ selectedArticleForHistory.titre }}</h2>
+				<button class="text-slate-400 hover:text-slate-600 transition" (click)="closeHistory()">
+					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+					</svg>
+				</button>
+			</div>
+			<div class="p-6 space-y-5 max-h-[60vh] overflow-y-auto">
+				<div class="space-y-2">
+					<p class="text-sm text-slate-600"><strong class="text-slate-900">Date de création:</strong> {{ selectedArticleForHistory.date_soumission | date:'dd/MM/yyyy HH:mm' }}</p>
+					<p class="text-sm text-slate-600" *ngIf="selectedArticleForHistory.mots_cles"><strong class="text-slate-900">Mots-clés:</strong> {{ selectedArticleForHistory.mots_cles }}</p>
+				</div>
+
+				<div>
+					<h3 class="font-semibold text-slate-900 mb-3">Assignations</h3>
+					<div class="space-y-3" *ngIf="getAssignationsForArticle(selectedArticleForHistory.id_article).length > 0">
+						<div class="card card-body" *ngFor="let assign of getAssignationsForArticle(selectedArticleForHistory.id_article)">
+							<div class="flex items-center justify-between mb-2">
+								<strong class="text-slate-900">Expert {{ assign.expert_nom || assign.id_expert }}</strong>
+								<span class="badge badge-neutral text-xs">{{ assign.statut_assignation || '—' }}</span>
+							</div>
+							<div class="text-sm text-slate-600 space-y-1">
+								<p>Assigné le : {{ getAssignationDate(assign, selectedArticleForHistory) ? (getAssignationDate(assign, selectedArticleForHistory) | date:'dd/MM/yyyy') : '-' }}</p>
+								<p *ngIf="assign.date_limite">Date limite : {{ assign.date_limite | date:'dd/MM/yyyy' }}</p>
+								<p *ngIf="assign.statut_assignation === 'termine' && assign.score_pertinence !== null" class="font-medium text-slate-900">⭐ Note donnée: {{ to10(assign.score_pertinence) | number:'1.1-1' }}/10</p>
+							</div>
+						</div>
+					</div>
+					<div class="text-center py-6 text-slate-500" *ngIf="getAssignationsForArticle(selectedArticleForHistory.id_article).length === 0">
+						<p>Aucune assignation pour cet article.</p>
+					</div>
+				</div>
+
+				<div class="pt-4 border-t border-slate-200">
+					<h3 class="font-semibold text-slate-900 mb-3">Reviews</h3>
+					<div class="space-y-3" *ngIf="getReviewsForSelected().length > 0; else noReviews">
+						<div class="p-4 bg-slate-50 rounded-lg border border-slate-200" *ngFor="let rev of getReviewsForSelected()">
+							<div class="flex items-start justify-between">
+								<div class="space-y-1 text-sm">
+									<p class="text-slate-900 font-medium">👤 {{ rev.expert_nom || rev.id_expert }}</p>
+									<p>🗓️ {{ rev.date_soumission_review | date:'dd/MM/yyyy' }}</p>
+								</div>
+								<div class="text-right">
+									<span class="badge badge-success">⭐ {{ to10(rev.note_globale) | number:'1.1-1' }}/10</span>
+									<div class="text-xs text-slate-600 mt-1">Recommandation: <span class="font-semibold text-slate-900">{{ rev.recommandation }}</span></div>
+								</div>
+							</div>
+							<div class="text-sm text-slate-700 mt-2" *ngIf="rev.commentaires">"{{ rev.commentaires }}"</div>
+						</div>
+					</div>
+					<ng-template #noReviews>
+						<div class="text-center py-6 text-slate-500">Aucune review soumise pour cet article.</div>
+					</ng-template>
+				</div>
+			</div>
+			<div class="flex justify-end gap-3 p-6 border-t border-slate-200 bg-slate-50">
+				<button class="btn btn-ghost" (click)="closeHistory()">Fermer</button>
+			</div>
+		</div>
+	</div>
+</div>

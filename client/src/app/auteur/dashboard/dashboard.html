@@ -1,8 +1,48 @@
-<div class="dashboard">
-  <h1>Espace Auteur</h1>
+<div class="min-h-screen bg-slate-50 py-10 px-4">
+  <div class="app-container">
+  <div class="mb-8">
+    <h1 class="text-2xl font-semibold text-slate-900 mb-1">Espace Auteur</h1>
+      <p class="text-slate-600">Créez, gérez et soumettez vos articles pour révision par les pairs</p>
+    </div>
 
-  <div class="menu">
-    <a routerLink="/auteur/submit-article" class="btn">Soumettre un article</a>
-    <a routerLink="/auteur/my-articles" class="btn">Mes articles</a>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <a routerLink="/auteur/my-articles" 
+         class="group card card-body hover:shadow-soft transition-all hover:-translate-y-1">
+        <div class="flex items-start justify-between">
+          <div>
+      <h2 class="text-lg font-semibold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">Mes Articles</h2>
+      <p class="text-slate-600 text-sm mb-3">Créez, modifiez et gérez tous vos articles en brouillon ou soumis</p>
+            <div class="flex items-center text-primary-600 font-semibold group-hover:translate-x-1 transition-transform">
+              Accéder
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </div>
+      <div class="bg-emerald-100 rounded-xl p-2.5 group-hover:bg-emerald-200 transition-colors">
+      <span class="text-xl">📚</span>
+          </div>
+        </div>
+      </a>
+
+      <a routerLink="/auteur/submit-article" 
+         class="group card card-body hover:shadow-soft transition-all hover:-translate-y-1">
+        <div class="flex items-start justify-between">
+          <div>
+        <h2 class="text-lg font-semibold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">Soumettre pour Review</h2>
+        <p class="text-slate-600 text-sm mb-3">Sélectionnez un article et assignez-le à un expert pour révision</p>
+            <div class="flex items-center text-primary-600 font-semibold group-hover:translate-x-1 transition-transform">
+              Commencer
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </div>
+        <div class="bg-sky-100 rounded-xl p-2.5 group-hover:bg-sky-200 transition-colors">
+        <span class="text-xl">✍️</span>
+          </div>
+        </div>
+      </a>
+    </div>
   </div>
 </div>

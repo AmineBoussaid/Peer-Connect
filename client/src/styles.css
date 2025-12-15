@@ -1,1 +1,78 @@
-/* You can add global styles to this file, and also import other style files */
+/* Tailwind CSS imports */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global design system: modern, clean, responsive */
+
+:root {
+	--color-bg: #f8fafc;
+	--color-surface: #ffffff;
+	--color-border: #e2e8f0;
+	--color-muted: #64748b;
+	--color-text: #0f172a;
+	--color-primary: #2563eb;
+	--color-primary-600: #1d4ed8;
+	--color-secondary: #0ea5e9;
+	--color-success: #16a34a;
+	--color-warning: #f59e0b;
+	--color-danger: #dc2626;
+	--shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
+	--radius: 12px;
+
+	--font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+	--font-size-base: 14px;
+	--line-height: 1.5;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+	margin: 0;
+	background: radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.05), transparent 35%),
+				radial-gradient(circle at 80% 0%, rgba(14, 165, 233, 0.06), transparent 30%),
+				var(--color-bg);
+	color: var(--color-text);
+	font-family: var(--font-family);
+	font-size: var(--font-size-base);
+	line-height: var(--line-height);
+}
+
+@layer base {
+	 h1 { @apply text-2xl font-semibold text-slate-900; }
+	 h2 { @apply text-xl font-semibold text-slate-900; }
+	 h3 { @apply text-lg font-semibold text-slate-900; }
+	 h4 { @apply text-base font-semibold text-slate-900; }
+	 p, li, label, input, select, textarea, button { @apply text-[14px] leading-relaxed; }
+}
+
+@layer components {
+	.app-shell { @apply min-h-screen bg-slate-50 text-slate-900; }
+	.app-container { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+	.card { @apply bg-white rounded-xl border border-slate-200 shadow-sm; box-shadow: var(--shadow-soft); }
+	.card-body { @apply p-4 sm:p-5; }
+	.section-title { @apply text-xl font-semibold text-slate-900; }
+	.text-muted { @apply text-[13px] text-slate-500; }
+	.input { @apply w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition; }
+	.select { @apply w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition; }
+	.textarea { @apply w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition; }
+	.btn { @apply inline-flex items-center justify-center gap-2 rounded-lg border border-transparent px-3 py-2 text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2; }
+	.btn-primary { @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500; }
+	.btn-secondary { @apply bg-slate-800 text-white hover:bg-slate-900 focus:ring-slate-700; }
+	.btn-ghost { @apply bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:bg-slate-50; }
+	.btn-danger { @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500; }
+	.badge { @apply inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold; }
+	.badge-neutral { @apply bg-slate-100 text-slate-700; }
+	.badge-success { @apply bg-emerald-100 text-emerald-700; }
+	.badge-warning { @apply bg-amber-100 text-amber-700; }
+	.badge-danger { @apply bg-red-100 text-red-700; }
+	.badge-info { @apply bg-sky-100 text-sky-700; }
+	.table-wrap { @apply overflow-x-auto border border-slate-200 rounded-xl bg-white shadow-sm; }
+	.table { @apply min-w-full divide-y divide-slate-200; }
+	.table th { @apply bg-slate-50 px-3 py-2.5 text-left text-[11px] font-semibold uppercase tracking-wide text-slate-500; }
+	.table td { @apply px-3 py-2.5 text-[13px] text-slate-800; }
+}
+
+@layer utilities {
+	.shadow-soft { box-shadow: var(--shadow-soft); }
+}

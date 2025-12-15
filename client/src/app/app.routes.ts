@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login';
+import { RegisterComponent } from './auth/register/register';
 
 export const routes: Routes = [
 
@@ -7,6 +8,7 @@ export const routes: Routes = [
 
   // Page login
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 
   // Lazy loading des rôles
   { path: 'auteur', loadChildren: () => import('./auteur/auteur.routes').then(m => m.AUTEUR_ROUTES) },

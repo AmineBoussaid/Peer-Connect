@@ -1,0 +1,20 @@
+talbe utilisateur
+id_utilisateur, nom, email, mot_de_passe, role
+
+table administrateur:
+id_utilisateur
+
+table auteur :
+id_utilisateur
+
+table expert:
+id_utilisateur, domaines_expertise, cv, score_credibilite, disponibilite
+
+table article :
+id_article, id_auteur, titre, resume, mots_cles, date_soumission, fichier_pdf
+
+table assignation:
+id_assignation, id_expert, id_article, date_limite, statut_assignation, score_pertinence
+
+table review :
+id_review, id_assignation, id_expert, id_article, commentaires, note_globale, recommandation, date_soumission_review

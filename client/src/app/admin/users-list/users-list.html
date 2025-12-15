@@ -1,0 +1,71 @@
+<div class="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-8 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-6 flex items-center justify-between">
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900">Tous les utilisateurs</h2>
+        <p class="text-gray-600 text-sm">Liste des utilisateurs avec leurs infos</p>
+      </div>
+      <button class="px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm" (click)="load()">↻ Actualiser</button>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+      <div class="flex flex-col sm:flex-row gap-3">
+        <input type="text" [(ngModel)]="filter" placeholder="Recherche (nom ou email)" class="flex-1 rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 px-3 py-2" />
+        <select [(ngModel)]="roleFilter" class="sm:w-48 rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 px-3 py-2">
+          <option value="all">Tous les rôles</option>
+          <option value="admin">Admin</option>
+          <option value="expert">Expert</option>
+          <option value="auteur">Auteur</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-md overflow-x-auto">
+      <table class="min-w-full text-sm">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-4 py-3 text-left font-semibold text-gray-700">Nom</th>
+            <th class="px-4 py-3 text-left font-semibold text-gray-700">Email</th>
+            <th class="px-4 py-3 text-left font-semibold text-gray-700">Rôle</th>
+            <th class="px-4 py-3 text-left font-semibold text-gray-700">Action</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr *ngFor="let u of paginatedUsers">
+            <td class="px-4 py-2 text-gray-900 font-medium">{{ u.nom }}</td>
+            <td class="px-4 py-2 text-gray-900">{{ u.email }}</td>
+            <td class="px-4 py-2">
+              <span class="px-2 py-1 rounded-full text-xs font-medium"
+                [class]="u.role === 'admin' ? 'bg-indigo-100 text-indigo-700' : (u.role === 'expert' ? 'bg-cyan-100 text-cyan-700' : 'bg-emerald-100 text-emerald-700')">
+                {{ u.role | titlecase }}
+              </span>
+            </td>
+            <td class="px-4 py-2">
+              <button (click)="viewDetails(u.id_utilisateur)" class="px-3 py-1 rounded-md bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium transition-colors">
+                Détails
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div *ngIf="totalPages > 1" class="mt-6 flex items-center justify-between">
+      <button class="px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" 
+              (click)="prevPage()" 
+              [disabled]="page === 1">
+        ← Précédent
+      </button>
+      <p class="text-xs text-gray-600">
+        Page <span class="font-semibold">{{ page }}</span> sur <span class="font-semibold">{{ totalPages }}</span> • 
+        <span class="font-semibold">{{ filtered.length }}</span> utilisateur(s)
+      </p>
+      <button class="px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" 
+              (click)="nextPage()" 
+              [disabled]="page === totalPages">
+        Suivant →
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="min-h-screen bg-slate-50 py-10 px-4">
+  <div class="app-container max-w-3xl mx-auto">
+    <h1 class="text-2xl font-semibold text-slate-900 mb-6">Profil Expert</h1>
+    <div class="card card-body mb-6">
+      <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-200">
+        <div class="h-14 w-14 rounded-xl bg-sky-100 flex items-center justify-center text-2xl shadow-soft">👤</div>
+        <div>
+          <p class="text-base font-semibold text-slate-900">{{ user?.nom }}</p>
+          <p class="text-slate-600 text-sm">{{ user?.email }}</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="p-4 bg-sky-50 rounded-xl border border-sky-200">
+          <p class="text-xs font-semibold uppercase text-sky-600 mb-1">Assignations</p>
+          <p class="text-2xl font-semibold text-sky-700">{{ assignmentsCount }}</p>
+        </div>
+        <div class="p-4 bg-sky-50 rounded-xl border border-sky-200">
+          <p class="text-xs font-semibold uppercase text-sky-600 mb-1">Reviews</p>
+          <p class="text-2xl font-semibold text-sky-700">{{ reviewsCount }}</p>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <p class="text-xs font-semibold uppercase text-slate-600 mb-1">CV</p>
+          <p class="text-sm" *ngIf="cv; else nocv"><a [href]="cv" target="_blank" class="text-primary-600 font-medium">Voir le CV</a></p>
+          <ng-template #nocv><span class="text-slate-500">Non importé</span></ng-template>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domaines d'expertise Section -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xl font-bold text-gray-900">Domaines d'expertise</h3>
+        <button *ngIf="!editingDomains" (click)="startEditingDomains()" class="px-4 py-2 rounded-md bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-medium">
+          ✏️ Modifier
+        </button>
+      </div>
+
+      <!-- Display mode -->
+      <div *ngIf="!editingDomains">
+        <div *ngIf="selectedDomains.length > 0" class="flex flex-wrap gap-2">
+          <span *ngFor="let domain of selectedDomains" class="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-sm font-medium">
+            {{ domain }}
+          </span>
+        </div>
+        <p *ngIf="selectedDomains.length === 0" class="text-gray-500 italic">Aucun domaine d'expertise défini</p>
+      </div>
+
+      <!-- Edit mode -->
+      <div *ngIf="editingDomains">
+        <p class="text-sm text-gray-600 mb-3">Sélectionnez vos domaines d'expertise (plusieurs choix possibles) :</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mb-4">
+          <button *ngFor="let domain of availableDomains" 
+                  type="button"
+                  (click)="toggleDomainSelection(domain)"
+                  [class]="isDomainSelected(domain) 
+                    ? 'px-3 py-2 border-2 border-cyan-500 bg-cyan-50 text-cyan-700 rounded-lg text-sm font-medium transition-all' 
+                    : 'px-3 py-2 border-2 border-gray-300 bg-white text-gray-700 rounded-lg text-sm hover:border-cyan-300 transition-all'">
+            <span *ngIf="isDomainSelected(domain)">✓</span> {{ domain }}
+          </button>
+        </div>
+        <div class="flex gap-3">
+          <button (click)="saveDomains()" class="px-4 py-2 rounded-md bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-medium">
+            💾 Enregistrer
+          </button>
+          <button (click)="cancelEditingDomains()" class="px-4 py-2 rounded-md bg-gray-300 hover:bg-gray-400 text-gray-800 text-sm font-medium">
+            Annuler
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h3 class="text-xl font-bold text-gray-900 mb-3">{{ cv ? 'Mettre à jour le CV' : 'Importer le CV' }}</h3>
+      <div class="flex items-center gap-3">
+        <input type="file" accept=".pdf,.doc,.docx" (change)="onCvSelected($event)" class="block w-full" [disabled]="uploading" />
+        <button (click)="saveCv()" [disabled]="uploading || !selectedFile" class="px-4 py-2 rounded-md bg-cyan-600 hover:bg-cyan-700 disabled:bg-gray-400 text-white text-sm font-medium">Sauvegarder</button>
+      </div>
+      <p class="text-sm text-gray-500 mt-2" *ngIf="uploading">Import en cours...</p>
+      <p class="text-sm text-green-600 mt-2" *ngIf="cv && !uploading && !selectedFile">✓ CV importé avec succès</p>
+    </div>
+  </div>
+</div>

@@ -1,38 +1,71 @@
-<nav class="navbar">
-  <div class="nav-container">
-    <div class="logo">
-      <h2>PeerConnect</h2>
-    </div>
+<nav class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur">
+  <div class="app-container">
+    <div class="flex h-16 items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-100 text-sky-700 text-lg shadow-soft">🔗</div>
+        <div>
+          <p class="text-sm font-semibold text-slate-500">PeerConnect</p>
+          <p class="text-base font-semibold text-slate-900 leading-tight">Plateforme d'échanges</p>
+        </div>
+      </div>
 
-    <ul class="nav-menu">
-      <!-- AUTEUR -->
-      <ng-container *ngIf="role === 'auteur'">
-        <li><span class="menu-title">Espace Auteur</span></li>
-        <li><a routerLink="/auteur" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Acceuille</a></li>
-        <li><a routerLink="/auteur/submit-article" routerLinkActive="active">Soumettre un article</a></li>
-        <li><a routerLink="/auteur/my-articles" routerLinkActive="active">Mes articles</a></li>
-      </ng-container>
+      <ul class="hidden md:flex items-center gap-1 text-sm font-semibold text-slate-700">
+        <ng-container *ngIf="role === 'auteur'">
+          <li><a class="px-3 py-2 rounded-lg hover:bg-slate-100 transition" [routerLinkActive]="getActiveClasses()" routerLink="/auteur" [routerLinkActiveOptions]="{exact: true}">Acceuille</a></li>
+          <li><a class="px-3 py-2 rounded-lg hover:bg-slate-100 transition" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/submit-article">Soumettre un article</a></li>
+          <li><a class="px-3 py-2 rounded-lg hover:bg-slate-100 transition" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/my-articles">Mes articles</a></li>
+          <li><a class="px-3 py-2 rounded-lg hover:bg-slate-100 transition" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/profile">Profil</a></li>
+        </ng-container>
 
-      <!-- EXPERT -->
-      <ng-container *ngIf="role === 'expert'">
-        <li><span class="menu-title">Espace Expert</span></li>
-        <li><a routerLink="/expert" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Acceuille</a></li>
-        <li><a routerLink="/expert/assignments" routerLinkActive="active">Mes Assignations</a></li>
-        <li><a routerLink="/expert/submit-review" routerLinkActive="active">Soumettre un review</a></li>
-      </ng-container>
+        <ng-container *ngIf="role === 'expert'">
+          <li><span class="px-3 py-2 rounded-lg bg-sky-50 text-sky-700">Espace Expert</span></li>
+          <li><a class="px-3 py-2 rounded-lg hover:bg-slate-100 transition" [routerLinkActive]="getActiveClasses()" routerLink="/expert" [routerLinkActiveOptions]="{exact: true}">Acceuille</a></li>
+          <li><a class="px-3 py-2 rounded-lg hover:bg-slate-100 transition" [routerLinkActive]="getActiveClasses()" routerLink="/expert/assignments">Mes Assignations</a></li>
+          <li><a class="px-3 py-2 rounded-lg hover:bg-slate-100 transition" [routerLinkActive]="getActiveClasses()" routerLink="/expert/submit-review">Soumettre un review</a></li>
+          <li><a class="px-3 py-2 rounded-lg hover:bg-slate-100 transition" [routerLinkActive]="getActiveClasses()" routerLink="/expert/profile">Profil</a></li>
+        </ng-container>
 
-      <!-- ADMIN -->
-      <ng-container *ngIf="role === 'admin'">
-        <li><span class="menu-title">Espace Administrateur</span></li>
-        <li><a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Acceuille</a></li>
-        <li><a routerLink="/admin/manage-experts" routerLinkActive="active">Gérer les experts</a></li>
-        <li><a routerLink="/admin/workflow" routerLinkActive="active">Workflow articles</a></li>
-      </ng-container>
-    </ul>
+        <ng-container *ngIf="role === 'admin'">
+          <li><span class="px-3 py-2 rounded-lg bg-indigo-50 text-indigo-700">Espace Administrateur</span></li>
+          <li><a class="px-3 py-2 rounded-lg hover:bg-slate-100 transition" [routerLinkActive]="getActiveClasses()" routerLink="/admin" [routerLinkActiveOptions]="{exact: true}">Acceuille</a></li>
+          <li><a class="px-3 py-2 rounded-lg hover:bg-slate-100 transition" [routerLinkActive]="getActiveClasses()" routerLink="/admin/manage-experts">Gérer les experts</a></li>
+          <li><a class="px-3 py-2 rounded-lg hover:bg-slate-100 transition" [routerLinkActive]="getActiveClasses()" routerLink="/admin/workflow">Workflow articles</a></li>
+          <li><a class="px-3 py-2 rounded-lg hover:bg-slate-100 transition" [routerLinkActive]="getActiveClasses()" routerLink="/admin/users">Tous les utilisateurs</a></li>
+        </ng-container>
+      </ul>
 
-    <div class="nav-actions">
-      <span class="user-role" *ngIf="role">{{ role | titlecase }}</span>
-      <button class="logout-btn" (click)="logout()">Déconnexion</button>
+      <div class="flex items-center gap-2">
+        <span class="hidden sm:inline-flex items-center rounded-lg bg-white px-3 py-1 text-sm text-slate-600 border border-slate-200" *ngIf="userName">{{ userName }}</span>
+        <button class="btn btn-ghost text-slate-700" (click)="logout()">Déconnexion</button>
+        <button class="md:hidden inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-700 shadow-sm" (click)="toggleMobile()">☰</button>
+      </div>
     </div>
   </div>
 </nav>
+
+<div class="md:hidden border-b border-slate-200 bg-white/90 backdrop-blur" *ngIf="mobileOpen">
+  <div class="px-4 py-3 space-y-2">
+    <ng-container *ngIf="role === 'auteur'">
+      <a class="block px-3 py-2 rounded-lg hover:bg-slate-100" routerLink="/auteur" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">Acceuille</a>
+      <a class="block px-3 py-2 rounded-lg hover:bg-slate-100" routerLink="/auteur/submit-article" routerLinkActive="active">Soumettre un article</a>
+      <a class="block px-3 py-2 rounded-lg hover:bg-slate-100" routerLink="/auteur/my-articles" routerLinkActive="active">Mes articles</a>
+      <a class="block px-3 py-2 rounded-lg hover:bg-slate-100" routerLink="/auteur/profile" routerLinkActive="active">Profil</a>
+    </ng-container>
+
+    <ng-container *ngIf="role === 'expert'">
+      <div class="px-3 py-2 rounded-lg bg-sky-50 text-sky-700 font-semibold">Espace Expert</div>
+      <a class="block px-3 py-2 rounded-lg hover:bg-slate-100" routerLink="/expert" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">Acceuille</a>
+      <a class="block px-3 py-2 rounded-lg hover:bg-slate-100" routerLink="/expert/assignments" routerLinkActive="active">Mes Assignations</a>
+      <a class="block px-3 py-2 rounded-lg hover:bg-slate-100" routerLink="/expert/submit-review" routerLinkActive="active">Soumettre un review</a>
+      <a class="block px-3 py-2 rounded-lg hover:bg-slate-100" routerLink="/expert/profile" routerLinkActive="active">Profil</a>
+    </ng-container>
+
+    <ng-container *ngIf="role === 'admin'">
+      <div class="px-3 py-2 rounded-lg bg-indigo-50 text-indigo-700 font-semibold">Espace Administrateur</div>
+      <a class="block px-3 py-2 rounded-lg hover:bg-slate-100" routerLink="/admin" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">Acceuille</a>
+      <a class="block px-3 py-2 rounded-lg hover:bg-slate-100" routerLink="/admin/manage-experts" routerLinkActive="active">Gérer les experts</a>
+      <a class="block px-3 py-2 rounded-lg hover:bg-slate-100" routerLink="/admin/workflow" routerLinkActive="active">Workflow articles</a>
+      <a class="block px-3 py-2 rounded-lg hover:bg-slate-100" routerLink="/admin/users" routerLinkActive="active">Tous les utilisateurs</a>
+    </ng-container>
+  </div>
+</div>

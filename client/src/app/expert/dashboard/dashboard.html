@@ -1,8 +1,48 @@
-<div class="dashboard">
-  <h1>Espace Expert</h1>
+<div class="min-h-screen bg-slate-50 py-10 px-4">
+  <div class="app-container">
+  <div class="mb-8">
+    <h1 class="text-2xl font-semibold text-slate-900 mb-1">Espace Expert</h1>
+      <p class="text-slate-600">Gérez vos assignations et soumettez vos évaluations</p>
+    </div>
 
-  <div class="menu">
-    <a routerLink="/expert/assignments" class="btn">Mes Assignations</a>
-    <a routerLink="/expert/submit-review" class="btn">Soumettre un review</a>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <a routerLink="/expert/assignments" 
+         class="group card card-body hover:shadow-soft transition-all hover:-translate-y-1">
+        <div class="flex items-start justify-between">
+          <div>
+      <h2 class="text-lg font-semibold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">Mes Assignations</h2>
+      <p class="text-slate-600 text-sm mb-3">Consultez et gérez toutes vos assignations d'articles</p>
+            <div class="flex items-center text-primary-600 font-semibold group-hover:translate-x-1 transition-transform">
+              Accéder
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </div>
+      <div class="bg-sky-100 rounded-xl p-2.5 group-hover:bg-sky-200 transition-colors">
+      <span class="text-xl">📋</span>
+          </div>
+        </div>
+      </a>
+
+      <a routerLink="/expert/submit-review" 
+         class="group card card-body hover:shadow-soft transition-all hover:-translate-y-1">
+        <div class="flex items-start justify-between">
+          <div>
+        <h2 class="text-lg font-semibold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">Soumettre une Review</h2>
+        <p class="text-slate-600 text-sm mb-3">Évaluez les articles et soumettez votre évaluation</p>
+            <div class="flex items-center text-primary-600 font-semibold group-hover:translate-x-1 transition-transform">
+              Commencer
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </div>
+        <div class="bg-sky-100 rounded-xl p-2.5 group-hover:bg-sky-200 transition-colors">
+        <span class="text-xl">✍️</span>
+          </div>
+        </div>
+      </a>
+    </div>
   </div>
 </div>

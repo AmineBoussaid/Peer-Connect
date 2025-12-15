@@ -1,8 +1,35 @@
-<div class="login-container">
-  <h1>Connexion</h1>
-  <p>Choisissez un rôle :</p>
+<div class="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12">
+  <div class="w-full max-w-md">
+    <div class="card card-body">
+      <div class="text-center mb-7">
+        <div class="mx-auto h-14 w-14 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center text-2xl shadow-sm">🔐</div>
+        <h1 class="mt-4 text-2xl font-semibold text-slate-900">Connexion</h1>
+        <p class="mt-1 text-sm text-slate-600">Accédez à votre espace PeerConnect</p>
+      </div>
 
-  <button (click)="goTo('admin')">Admin</button>
-  <button (click)="goTo('auteur')">Auteur</button>
-  <button (click)="goTo('expert')">Expert</button>
+      <div class="space-y-5">
+        <div>
+          <label class="block text-sm font-semibold text-slate-900 mb-2">Email</label>
+          <input type="email" [(ngModel)]="email" placeholder="votre@email.com"
+                 class="input" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-slate-900 mb-2">Mot de passe</label>
+          <input type="password" [(ngModel)]="password" placeholder="••••••••"
+                 class="input" />
+        </div>
+      </div>
+
+      <button (click)="login()"
+              class="btn btn-primary w-full mt-7 font-semibold">
+        Se connecter
+      </button>
+
+      <div class="mt-5 text-center">
+        <p class="text-sm text-slate-600">Pas de compte ?</p>
+        <a routerLink="/register" class="text-sm font-semibold text-primary-600 hover:text-primary-700 transition">Créer un compte</a>
+      </div>
+    </div>
+  </div>
 </div>
