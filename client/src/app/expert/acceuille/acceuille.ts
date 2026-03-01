@@ -139,21 +139,21 @@ export class ExpertAcceuilleComponent {
       {
         label: 'Articles à Évaluer',
         value: this.assignations.length,
-        icon: '📋',
+        icon: 'clipboard',
         color: 'bg-blue-50',
         textColor: 'text-blue-700'
       },
       {
         label: 'Articles Disponibles',
         value: this.articles.length,
-        icon: '📚',
+        icon: 'book',
         color: 'bg-purple-50',
         textColor: 'text-purple-700'
       },
       {
         label: 'Évaluations Complétées',
         value: this.assignations.filter(a => a.statut_assignation === 'termine').length,
-        icon: '✅',
+        icon: 'check',
         color: 'bg-green-50',
         textColor: 'text-green-700'
       }

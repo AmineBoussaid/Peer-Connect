@@ -1,34 +1,37 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8 px-4">
-  <div class="app-container">
-    <!-- HEADER SECTION -->
-    <div class="mb-10">
-      <div class="flex items-center gap-4 mb-6">
-        <div class="h-12 w-12 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl">📝</div>
+<div class="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 px-4 py-8 sm:px-6 lg:px-8">
+  <div class="mx-auto w-full max-w-7xl">
+    <div class="mb-6 px-0 py-0">
+      <div class="flex items-center gap-4">
+        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 text-emerald-700 ring-1 ring-emerald-100">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 4.75A1.75 1.75 0 0 1 8.75 3h6.88c.46 0 .9.18 1.23.51l2.63 2.63c.33.33.51.77.51 1.23v11.88A1.75 1.75 0 0 1 18.25 21h-9.5A1.75 1.75 0 0 1 7 19.25V4.75Zm3 6.25h4m-4 3h6"></path>
+          </svg>
+        </div>
         <div>
-          <h1 class="text-3xl font-bold text-slate-900">Bienvenue, Auteur</h1>
-          <p class="text-slate-600">Gérez vos articles et soumettez-les pour examen par les pairs</p>
+          <h1 class="text-base font-semibold tracking-tight text-slate-900">Bienvenue, Auteur</h1>
+          <p class="text-xs text-slate-500">Gérez vos articles et soumettez-les pour examen par les pairs</p>
         </div>
       </div>
     </div>
 
     <!-- STATISTICS CARDS -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+    <div class="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
       <div *ngFor="let stat of statsCards" 
-           [class]="stat.color + ' rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-shadow'">
+           [class]="stat.color + ' rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow'">
         <div class="flex items-start justify-between">
           <div>
             <p class="text-sm text-slate-600 font-medium">{{ stat.label }}</p>
-            <p class="text-3xl font-bold mt-1" [class]="stat.textColor">{{ stat.value }}</p>
+            <p class="text-2xl font-bold mt-1" [class]="stat.textColor">{{ stat.value }}</p>
           </div>
-          <span class="text-2xl">{{ stat.icon }}</span>
+          <span class="h-2.5 w-2.5 rounded-full bg-slate-300"></span>
         </div>
       </div>
     </div>
 
     <!-- ARTICLES SECTION -->
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+    <div class="overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-sm">
       <div class="px-6 py-5 border-b border-slate-200">
-        <h2 class="text-2xl font-bold text-slate-900">Articles à Consulter</h2>
+        <h2 class="text-xl font-semibold text-slate-900">Articles à Consulter</h2>
         <p class="text-sm text-slate-600 mt-1">Explorez tous les articles disponibles sur la plateforme</p>
       </div>
       

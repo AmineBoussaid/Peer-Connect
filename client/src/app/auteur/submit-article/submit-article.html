@@ -1,19 +1,19 @@
-<div class="min-h-screen bg-slate-50 py-10 px-4">
+<div class="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 px-4 py-8 sm:px-6 lg:px-8">
   <div class="app-container">
     <!-- En-tête -->
     <div class="mb-8">
-      <div class="flex items-center justify-between mb-4">
+      <div class="mb-4 flex items-center justify-between">
         <div>
-          <h1 class="text-2xl font-semibold text-slate-900">Soumettre un Article pour Review</h1>
-          <p class="text-slate-600 text-sm mt-2" *ngIf="currentStep === 0">Gérez vos soumissions d'articles aux experts</p>
+          <h1 class="text-base font-semibold text-slate-900">Soumettre un article pour évaluation</h1>
+          <p class="mt-1 text-xs text-slate-500" *ngIf="currentStep === 0">Gérez vos soumissions d'articles aux experts</p>
         </div>
-        <button class="btn btn-ghost flex items-center gap-2" (click)="showHistoryModal = true" *ngIf="currentStep > 0">
-          📋 Historique
+        <button class="btn btn-ghost text-xs flex items-center gap-2" (click)="showHistoryModal = true" *ngIf="currentStep > 0">
+          Historique
         </button>
       </div>
       
       <!-- Barre de progression (seulement si en mode soumission) -->
-      <div class="bg-white rounded-lg border border-slate-200 p-4 mb-6" *ngIf="currentStep > 0">
+      <div class="mb-6 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm" *ngIf="currentStep > 0">
         <div class="flex items-center justify-between mb-3">
           <p class="text-sm font-semibold text-slate-900">Étape {{ currentStep }} sur 4</p>
           <p class="text-xs text-slate-500">
@@ -35,7 +35,7 @@
     <!-- ÉTAPE 0: Liste des soumissions existantes -->
     <div *ngIf="currentStep === 0">
       <!-- Statistiques -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+      <div class="mb-8 grid grid-cols-1 gap-4 md:grid-cols-4">
         <div class="card card-body">
           <p class="text-xs font-semibold uppercase text-slate-600 mb-1">Total</p>
           <p class="text-2xl font-semibold text-slate-900">{{ assignations.length }}</p>
@@ -56,9 +56,9 @@
       </div>
 
       <!-- Liste des soumissions -->
-      <div class="card card-body">
+      <div class="card card-body rounded-3xl border border-slate-200/80 shadow-sm">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-          <h2 class="text-xl font-semibold text-slate-900">Historique des soumissions</h2>
+          <h2 class="text-base font-semibold text-slate-900">Historique des soumissions</h2>
           
           <div class="flex flex-wrap items-center gap-3">
             <!-- Options de groupement -->
@@ -71,8 +71,8 @@
               </select>
             </div>
             
-            <button class="btn btn-primary" (click)="startNewSubmission()">
-              ✚ Nouvelle soumission
+            <button class="btn btn-primary text-xs" (click)="startNewSubmission()">
+              Nouvelle soumission
             </button>
           </div>
         </div>
@@ -83,22 +83,22 @@
             <div class="card card-body hover:shadow-lg transition-shadow" *ngFor="let assign of paginatedAssignations">
               <div class="flex items-start justify-between mb-4">
                 <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-slate-900 mb-2">{{ getArticleTitle(assign.id_article) }}</h3>
+                  <h3 class="text-sm font-semibold text-slate-900 mb-2">{{ getArticleTitle(assign.id_article) }}</h3>
                   <div class="flex flex-wrap gap-4 text-sm text-slate-600">
                     <p class="flex items-center gap-1">
-                      <span class="font-semibold text-slate-900">👤 Expert:</span>
+                      <span class="font-semibold text-slate-900">Expert:</span>
                       {{ getExpertName(assign.id_expert) }}
                     </p>
                     <p class="flex items-center gap-1" *ngIf="assign.date_limite">
-                      <span class="font-semibold text-slate-900">📅 Limite:</span>
+                      <span class="font-semibold text-slate-900">Limite:</span>
                       {{ assign.date_limite | date:'dd/MM/yyyy' }}
                     </p>
                     <p class="flex items-center gap-1" *ngIf="getSubmissionDate(assign)">
-                      <span class="font-semibold text-slate-900">🗓️ Soumis le:</span>
+                      <span class="font-semibold text-slate-900">Soumis le:</span>
                       {{ getSubmissionDate(assign) | date:'dd/MM/yyyy' }}
                     </p>
                     <p class="flex items-center gap-1" *ngIf="assign.score_pertinence">
-                      <span class="font-semibold text-slate-900">⭐ Score:</span>
+                      <span class="font-semibold text-slate-900">Score:</span>
                       {{ (assign.score_pertinence/10) | number:'1.1-1' }}/10
                     </p>
                   </div>
@@ -119,13 +119,13 @@
 
           <!-- Pagination -->
           <div class="flex items-center justify-between pt-6 border-t border-slate-200 mt-6" *ngIf="totalAssignationPages > 1">
-            <button class="btn btn-ghost text-sm" (click)="prevAssignationPage()" [disabled]="assignationPage === 1">
+            <button class="btn btn-ghost text-xs" (click)="prevAssignationPage()" [disabled]="assignationPage === 1">
               ← Précédent
             </button>
             <span class="text-sm text-slate-600">
               Page {{ assignationPage }} sur {{ totalAssignationPages }} ({{ assignations.length }} assignation(s) au total)
             </span>
-            <button class="btn btn-ghost text-sm" (click)="nextAssignationPage()" [disabled]="assignationPage === totalAssignationPages">
+            <button class="btn btn-ghost text-xs" (click)="nextAssignationPage()" [disabled]="assignationPage === totalAssignationPages">
               Suivant →
             </button>
           </div>
@@ -138,15 +138,13 @@
               <!-- Header du groupe -->
               <div class="flex items-center justify-between mb-3 pb-3 border-b border-slate-200">
                 <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-slate-900">
-                    <span *ngIf="group.type === 'article'">📄</span>
-                    <span *ngIf="group.type === 'expert'">👤</span>
+                  <h3 class="text-sm font-semibold text-slate-900">
                     {{ group.title }}
                   </h3>
                   <p class="text-sm text-slate-600 mt-1">{{ group.count }} assignation(s)</p>
                 </div>
-                <button class="btn btn-ghost text-sm" (click)="toggleGroup(group.id)">
-                  <span *ngIf="!isGroupExpanded(group.id)">📋 Détails</span>
+                  <button class="btn btn-ghost text-xs" (click)="toggleGroup(group.id)">
+                  <span *ngIf="!isGroupExpanded(group.id)">Détails</span>
                   <span *ngIf="isGroupExpanded(group.id)">▲ Masquer</span>
                 </button>
               </div>
@@ -157,15 +155,15 @@
                   <div class="flex items-start justify-between">
                     <div class="flex-1 space-y-2">
                       <p class="font-semibold text-slate-900" *ngIf="group.type === 'expert'">
-                        📄 {{ getArticleTitle(assign.id_article) }}
+                        {{ getArticleTitle(assign.id_article) }}
                       </p>
                       <p class="font-semibold text-slate-900" *ngIf="group.type === 'article'">
-                        👤 {{ getExpertName(assign.id_expert) }}
+                        {{ getExpertName(assign.id_expert) }}
                       </p>
                       <div class="flex flex-wrap gap-3 text-sm text-slate-600">
-                        <p *ngIf="assign.date_limite">📅 Limite: {{ assign.date_limite | date:'dd/MM/yyyy' }}</p>
-                        <p *ngIf="getSubmissionDate(assign)">🗓️ Soumis: {{ getSubmissionDate(assign) | date:'dd/MM/yyyy' }}</p>
-                        <p *ngIf="assign.score_pertinence">⭐ Score: {{ (assign.score_pertinence/10) | number:'1.1-1' }}/10</p>
+                        <p *ngIf="assign.date_limite">Limite: {{ assign.date_limite | date:'dd/MM/yyyy' }}</p>
+                        <p *ngIf="getSubmissionDate(assign)">Soumis: {{ getSubmissionDate(assign) | date:'dd/MM/yyyy' }}</p>
+                        <p *ngIf="assign.score_pertinence">Score: {{ (assign.score_pertinence/10) | number:'1.1-1' }}/10</p>
                       </div>
                     </div>
                     <span class="badge ml-3" 
@@ -188,10 +186,10 @@
           <svg class="w-20 h-20 mx-auto mb-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
           </svg>
-          <h3 class="text-lg font-semibold text-slate-900 mb-2">Aucune soumission</h3>
-          <p class="text-slate-600 mb-6">Vous n'avez pas encore soumis d'articles pour review</p>
-          <button class="btn btn-primary" (click)="startNewSubmission()">
-            ✚ Créer ma première soumission
+          <h3 class="text-sm font-semibold text-slate-900 mb-2">Aucune soumission</h3>
+          <p class="text-slate-600 mb-6">Vous n'avez pas encore soumis d'articles pour évaluation</p>
+          <button class="btn btn-primary text-xs" (click)="startNewSubmission()">
+            Créer ma première soumission
           </button>
         </div>
       </div>
@@ -200,8 +198,8 @@
     <!-- Formulaire multi-étapes -->
     <div class="space-y-6">
       <!-- ÉTAPE 1: Sélectionner un article -->
-      <div class="card card-body" *ngIf="currentStep === 1">
-        <h2 class="text-xl font-semibold text-slate-900 mb-5">Étape 1: Sélectionnez votre article</h2>
+      <div class="card card-body rounded-3xl border border-slate-200/80 shadow-sm" *ngIf="currentStep === 1">
+        <h2 class="text-base font-semibold text-slate-900 mb-4">Étape 1: Sélectionnez votre article</h2>
         <p class="text-slate-600 mb-6">Choisissez l'article scientifique que vous souhaitez soumettre pour révision</p>
         <div class="space-y-3" *ngIf="myArticles.length > 0">
           <div class="border-2 rounded-xl p-4 cursor-pointer transition-all" 
@@ -218,25 +216,25 @@
                 </div>
                 <p class="text-sm text-slate-600 mt-2" *ngIf="article.resume">{{ article.resume }}</p>
                 <div class="flex gap-3 mt-3">
-                  <a *ngIf="article.fichier_pdf" [href]="getPdfUrl(article.fichier_pdf)" target="_blank" class="text-primary-600 hover:text-primary-700 font-medium text-sm">📎 PDF</a>
+                  <a *ngIf="article.fichier_pdf" [href]="getPdfUrl(article.fichier_pdf)" target="_blank" class="text-primary-600 hover:text-primary-700 font-medium text-sm">PDF</a>
                   <span class="badge badge-info text-xs" *ngIf="getAssignationsForArticle(article.id_article).length > 0">
                     {{ getAssignationsForArticle(article.id_article).length }} assignation(s)
                   </span>
                 </div>
               </div>
-              <div *ngIf="selectedArticleId === article.id_article" class="text-primary-600 text-2xl">✓</div>
+              <div *ngIf="selectedArticleId === article.id_article" class="text-primary-600 text-sm font-semibold">Sélectionné</div>
             </div>
           </div>
           
           <!-- Pagination controls for articles -->
           <div class="flex items-center justify-between pt-6 border-t border-slate-200" *ngIf="totalArticlePages > 1">
-            <button class="btn btn-ghost text-sm" (click)="prevArticlePage()" [disabled]="articlePage === 1">
+            <button class="btn btn-ghost text-xs" (click)="prevArticlePage()" [disabled]="articlePage === 1">
               ← Précédent
             </button>
             <span class="text-sm text-slate-600">
               Page {{ articlePage }} sur {{ totalArticlePages }}
             </span>
-            <button class="btn btn-ghost text-sm" (click)="nextArticlePage()" [disabled]="articlePage === totalArticlePages">
+            <button class="btn btn-ghost text-xs" (click)="nextArticlePage()" [disabled]="articlePage === totalArticlePages">
               Suivant pagination →
             </button>
           </div>
@@ -257,8 +255,8 @@
       </div>
 
       <!-- ÉTAPE 2: Choisir les experts -->
-      <div class="card card-body" *ngIf="currentStep === 2">
-        <h2 class="text-xl font-semibold text-slate-900 mb-5">Étape 2: Choisissez jusqu'à 5 experts</h2>
+      <div class="card card-body rounded-3xl border border-slate-200/80 shadow-sm" *ngIf="currentStep === 2">
+        <h2 class="text-base font-semibold text-slate-900 mb-4">Étape 2: Choisissez jusqu'à 5 experts</h2>
         <p class="text-slate-600 mb-6">Sélectionnez les experts qui devront évaluer votre article</p>
 
         <!-- Article sélectionné rappel -->
@@ -271,7 +269,7 @@
           <input type="text" 
                  [(ngModel)]="searchExpert" 
                  (ngModelChange)="applyFilters()"
-                 placeholder="🔍 Rechercher un expert..."
+                 placeholder="Rechercher un expert..."
                  class="input" />
           <select [(ngModel)]="filterDomain" (ngModelChange)="applyFilters()" class="select">
             <option value="all">Tous les domaines</option>
@@ -297,28 +295,28 @@
             <div class="flex items-start justify-between mb-3">
               <div class="flex-1">
                 <h3 class="font-semibold text-slate-900">{{ expert.nom }}</h3>
-                <p class="text-sm text-slate-600 mt-1">📧 {{ expert.email }}</p>
+                <p class="text-sm text-slate-600 mt-1">{{ expert.email }}</p>
               </div>
-              <span class="badge badge-warning text-xs shrink-0">⭐ {{ expert.score_credibilite || 0 }}</span>
+              <span class="badge badge-warning text-xs shrink-0">{{ expert.score_credibilite || 0 }}</span>
             </div>
             <p class="text-sm text-slate-600 mb-3" *ngIf="expert.domaines_expertise">
               <strong class="text-slate-900">Domaines:</strong> {{ expert.domaines_expertise }}
             </p>
             <div class="flex justify-center" *ngIf="isExpertSelected(expert.id_utilisateur)">
-              <span class="text-primary-600 font-semibold text-sm">✓ Sélectionné</span>
+              <span class="text-primary-600 font-semibold text-sm">Sélectionné</span>
             </div>
           </div>
         </div>
         
         <!-- Pagination controls for experts -->
         <div class="flex items-center justify-between pt-6 border-t border-slate-200" *ngIf="totalExpertPages > 1">
-          <button class="btn btn-ghost text-sm" (click)="prevExpertPage()" [disabled]="expertPage === 1">
+          <button class="btn btn-ghost text-xs" (click)="prevExpertPage()" [disabled]="expertPage === 1">
             ← Précédent
           </button>
           <span class="text-sm text-slate-600">
             Page {{ expertPage }} sur {{ totalExpertPages }} ({{ filteredExperts.length }} expert(s) au total)
           </span>
-          <button class="btn btn-ghost text-sm" (click)="nextExpertPage()" [disabled]="expertPage === totalExpertPages">
+          <button class="btn btn-ghost text-xs" (click)="nextExpertPage()" [disabled]="expertPage === totalExpertPages">
             Suivant pagination →
           </button>
         </div>
@@ -343,9 +341,9 @@
       </div>
 
       <!-- ÉTAPE 3: Date limite -->
-      <div class="card card-body" *ngIf="currentStep === 3">
-        <h2 class="text-xl font-semibold text-slate-900 mb-5">Étape 3: Fixez une date limite (optionnelle)</h2>
-        <p class="text-slate-600 mb-6">Définissez la date limite pour que les experts soumettent leurs reviews</p>
+      <div class="card card-body rounded-3xl border border-slate-200/80 shadow-sm" *ngIf="currentStep === 3">
+        <h2 class="text-base font-semibold text-slate-900 mb-4">Étape 3: Fixez une date limite (optionnelle)</h2>
+        <p class="text-slate-600 mb-6">Définissez la date limite pour que les experts soumettent leurs évaluations</p>
 
         <!-- Résumé des sélections -->
         <div class="space-y-4 p-4 bg-slate-50 border border-slate-200 rounded-lg mb-6">
@@ -360,13 +358,13 @@
 
         <!-- Sélection date limite -->
         <div class="mb-6">
-          <label class="block text-sm font-semibold text-slate-900 mb-2">Date limite de review</label>
+          <label class="block text-sm font-semibold text-slate-900 mb-2">Date limite d'évaluation</label>
           <input type="date" [(ngModel)]="dateLimite" name="dateLimite" class="input w-full md:w-64" />
           <p class="text-xs text-slate-500 mt-2">Laisser vide pour aucune limite</p>
         </div>
 
-        <div *ngIf="dateLimite" class="p-4 bg-sky-50 border border-sky-200 rounded-lg mb-6">
-          <p class="text-sm text-sky-900">📅 Date limite: <strong>{{ dateLimite | date:'dd/MM/yyyy' }}</strong></p>
+        <div *ngIf="dateLimite" class="mb-6 rounded-lg border border-sky-200 bg-sky-50 p-4">
+          <p class="text-sm text-sky-900">Date limite: <strong>{{ dateLimite | date:'dd/MM/yyyy' }}</strong></p>
         </div>
 
         <!-- Boutons de navigation étapes -->
@@ -381,9 +379,9 @@
       </div>
 
       <!-- ÉTAPE 4: Résumé et confirmation -->
-      <div class="card card-body bg-gradient-to-r from-emerald-50 to-sky-50" *ngIf="currentStep === 4">
-        <h2 class="text-xl font-semibold text-slate-900 mb-5 flex items-center gap-2">
-          <span>📋</span> Étape 4: Vérifiez et soumettez
+      <div class="card card-body rounded-3xl border border-slate-200/80 bg-gradient-to-r from-emerald-50 to-sky-50 shadow-sm" *ngIf="currentStep === 4">
+        <h2 class="mb-4 flex items-center gap-2 text-base font-semibold text-slate-900">
+          Étape 4: Vérifiez et soumettez
         </h2>
         <p class="text-slate-600 mb-6">Vérifiez toutes vos sélections avant de soumettre</p>
 
@@ -393,8 +391,8 @@
           <div class="pb-6 border-b border-slate-200">
             <p class="text-xs font-semibold uppercase text-slate-600 mb-2">1️⃣ Article sélectionné</p>
             <div class="space-y-2">
-              <p class="text-lg font-semibold text-slate-900">{{ getSelectedArticle()?.titre }}</p>
-              <p class="text-sm text-slate-600">📅 {{ getSelectedArticle()?.date_soumission | date:'dd/MM/yyyy' }}</p>
+              <p class="text-sm font-semibold text-slate-900">{{ getSelectedArticle()?.titre }}</p>
+              <p class="text-sm text-slate-600">{{ getSelectedArticle()?.date_soumission | date:'dd/MM/yyyy' }}</p>
               <p class="text-sm text-slate-600">{{ getSelectedArticle()?.resume }}</p>
             </div>
           </div>
@@ -405,9 +403,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div *ngFor="let expert of getSelectedExperts()" class="p-3 bg-primary-50 border border-primary-200 rounded-lg">
                 <p class="font-semibold text-slate-900">{{ expert.nom }}</p>
-                <p class="text-sm text-slate-600">📧 {{ expert.email }}</p>
-                <p class="text-xs text-slate-600">⭐ Score: {{ expert.score_credibilite || 0 }}/100</p>
-                <p class="text-xs text-slate-600 mt-1">📚 {{ expert.domaines_expertise }}</p>
+                <p class="text-sm text-slate-600">{{ expert.email }}</p>
+                <p class="text-xs text-slate-600">Score: {{ expert.score_credibilite || 0 }}/100</p>
+                <p class="text-xs text-slate-600 mt-1">{{ expert.domaines_expertise }}</p>
               </div>
             </div>
           </div>
@@ -416,7 +414,7 @@
           <div>
             <p class="text-xs font-semibold uppercase text-slate-600 mb-2">3️⃣ Date limite</p>
             <p class="text-slate-900" *ngIf="dateLimite">
-              <strong>📅 {{ dateLimite | date:'dd/MM/yyyy' }}</strong>
+              <strong>{{ dateLimite | date:'dd/MM/yyyy' }}</strong>
             </p>
             <p class="text-slate-600" *ngIf="!dateLimite">
               Aucune date limite définie
@@ -430,7 +428,7 @@
             ← Retour à la date limite
           </button>
           <button class="flex-1 btn btn-primary text-base font-semibold" (click)="submitToExpert()">
-            ✓ Confirmer la soumission
+            Confirmer la soumission
           </button>
         </div>
       </div>
@@ -440,7 +438,7 @@
     <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" *ngIf="showHistoryModal" (click)="showHistoryModal = false">
       <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[85vh] overflow-hidden" (click)="$event.stopPropagation()">
         <div class="flex items-center justify-between p-6 border-b border-slate-200 bg-gradient-to-r from-purple-50 to-sky-50">
-          <h2 class="text-2xl font-semibold text-slate-900">📋 Historique des assignations</h2>
+          <h2 class="text-2xl font-semibold text-slate-900">Historique des assignations</h2>
           <button class="text-slate-400 hover:text-slate-600 transition" (click)="showHistoryModal = false">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -451,7 +449,7 @@
         <div class="overflow-y-auto max-h-[calc(85vh-140px)] p-6 space-y-4" *ngIf="assignations.length > 0">
           <div class="card card-body hover:shadow-soft transition" *ngFor="let assign of assignations">
             <div class="flex items-start justify-between mb-3">
-              <h3 class="font-semibold text-slate-900 text-lg">{{ getArticleTitle(assign.id_article) }}</h3>
+              <h3 class="font-semibold text-slate-900 text-sm">{{ getArticleTitle(assign.id_article) }}</h3>
               <span class="badge" 
                     [class.badge-warning]="assign.statut_assignation === 'en_attente'"
                     [class.badge-info]="assign.statut_assignation === 'en_cours'"
@@ -477,7 +475,7 @@
         </div>
         
         <div class="flex justify-end gap-3 p-6 border-t border-slate-200 bg-slate-50">
-          <button class="btn btn-ghost" (click)="showHistoryModal = false">Fermer</button>
+          <button class="btn btn-ghost text-xs" (click)="showHistoryModal = false">Fermer</button>
         </div>
       </div>
     </div>

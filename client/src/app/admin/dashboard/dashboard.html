@@ -1,77 +1,100 @@
-<div class="min-h-screen bg-slate-50 py-10 px-4">
-  <div class="app-container">
-  <div class="text-center mb-8">
-    <h1 class="text-3xl font-semibold text-slate-900 mb-2">Espace Administrateur</h1>
-    <p class="text-base text-slate-600">Gérez les experts et suivez le workflow des articles</p>
+<div class="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 px-4 py-8 sm:px-6 lg:px-8">
+  <div class="mx-auto w-full max-w-6xl">
+    <div class="mb-6 px-0 py-0">
+      <div class="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-indigo-700">
+        <span class="h-1.5 w-1.5 rounded-full bg-indigo-500"></span>
+        Admin Console
+      </div>
+      <h1 class="mt-2 text-base font-semibold tracking-tight text-slate-900">Espace Administrateur</h1>
+      <p class="mt-1 max-w-2xl text-xs leading-5 text-slate-500">Gérez les experts et suivez le workflow des articles</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-      <div class="card card-body hover:shadow-soft transition-shadow">
-        <div class="flex items-center justify-between">
+    <div class="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div class="group rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+        <div class="flex items-start justify-between gap-4">
           <div>
-            <p class="text-xs font-semibold uppercase text-slate-600 mb-1">Total Experts</p>
-      <p class="text-2xl font-semibold text-indigo-600">24</p>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Total Experts</p>
+            <p class="mt-2 text-3xl font-semibold tracking-tight text-indigo-600">24</p>
           </div>
-      <div class="bg-indigo-100 rounded-xl p-3">
-      <span class="text-xl">👥</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card card-body hover:shadow-soft transition-shadow">
-        <div class="flex items-center justify-between">
-          <div>
-            <p class="text-xs font-semibold uppercase text-slate-600 mb-1">Articles Actifs</p>
-        <p class="text-2xl font-semibold text-emerald-600">156</p>
-          </div>
-        <div class="bg-emerald-100 rounded-xl p-3">
-        <span class="text-xl">📄</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card card-body hover:shadow-soft transition-shadow">
-        <div class="flex items-center justify-between">
-          <div>
-            <p class="text-xs font-semibold uppercase text-slate-600 mb-1">En Attente</p>
-        <p class="text-2xl font-semibold text-amber-600">12</p>
-          </div>
-        <div class="bg-amber-100 rounded-xl p-3">
-        <span class="text-xl">⏳</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Action Menu -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <a routerLink="/admin/manage-experts" 
-       class="group bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-200">
-        <div class="flex items-center space-x-4">
-        <div class="bg-indigo-100 rounded-lg p-3 group-hover:bg-indigo-200 transition-colors">
-        <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          <div class="rounded-2xl bg-gradient-to-br from-indigo-500/10 to-violet-500/10 p-3 ring-1 ring-indigo-100">
+            <svg class="h-6 w-6 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 19a4 4 0 0 0-8 0m8 0H8m8 0h3v-1a4 4 0 0 0-3-3.87m-8.5-.13A4 4 0 0 0 5 18v1h3m0-11a4 4 0 1 1 8 0 4 4 0 0 1-8 0Zm11 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-14 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
             </svg>
           </div>
+        </div>
+      </div>
+
+      <div class="group rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+        <div class="flex items-start justify-between gap-4">
           <div>
-        <h3 class="text-lg font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">Gérer les Experts</h3>
-        <p class="text-gray-600 mt-1 text-sm">Ajouter, modifier ou supprimer des experts</p>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Articles Actifs</p>
+            <p class="mt-2 text-3xl font-semibold tracking-tight text-emerald-600">156</p>
           </div>
+          <div class="rounded-2xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-3 ring-1 ring-emerald-100">
+            <svg class="h-6 w-6 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 4.75A1.75 1.75 0 0 1 8.75 3h6.88c.46 0 .9.18 1.23.51l2.63 2.63c.33.33.51.77.51 1.23v11.88A1.75 1.75 0 0 1 18.25 21h-9.5A1.75 1.75 0 0 1 7 19.25V4.75Zm3 6.25h4m-4 3h6m-6 3h6"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="group rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">En Attente</p>
+            <p class="mt-2 text-3xl font-semibold tracking-tight text-amber-600">12</p>
+          </div>
+          <div class="rounded-2xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 p-3 ring-1 ring-amber-100">
+            <svg class="h-6 w-6 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m5-2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+      <a
+        routerLink="/admin/manage-experts"
+        class="group rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-xl"
+      >
+        <div class="flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="rounded-2xl bg-gradient-to-br from-indigo-500/10 to-violet-500/10 p-3 ring-1 ring-indigo-100 transition-colors group-hover:from-indigo-500/15 group-hover:to-violet-500/15">
+              <svg class="h-7 w-7 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 18a4 4 0 1 0-8 0m8 0H8m8 0h3v-1a4 4 0 0 0-3.07-3.88M8.07 13.12A4 4 0 0 0 5 17v1h3m0-10a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900 transition-colors group-hover:text-indigo-600">Gérer les Experts</h3>
+              <p class="mt-1 text-sm leading-6 text-slate-600">Ajouter, modifier ou supprimer des experts</p>
+            </div>
+          </div>
+          <svg class="h-5 w-5 text-slate-400 transition-all group-hover:translate-x-0.5 group-hover:text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"></path>
+          </svg>
         </div>
       </a>
 
-      <a routerLink="/admin/workflow" 
-       class="group bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-purple-200">
-        <div class="flex items-center space-x-4">
-        <div class="bg-purple-100 rounded-lg p-3 group-hover:bg-purple-200 transition-colors">
-        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-            </svg>
+      <a
+        routerLink="/admin/workflow"
+        class="group rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-200 hover:shadow-xl"
+      >
+        <div class="flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="rounded-2xl bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 p-3 ring-1 ring-violet-100 transition-colors group-hover:from-violet-500/15 group-hover:to-fuchsia-500/15">
+              <svg class="h-7 w-7 text-violet-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.75 4h6.5A1.75 1.75 0 0 1 17 5.75v12.5A1.75 1.75 0 0 1 15.25 20h-6.5A1.75 1.75 0 0 1 7 18.25V5.75A1.75 1.75 0 0 1 8.75 4ZM10 9h4m-4 3h4m-4 3h2"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900 transition-colors group-hover:text-violet-600">Workflow Articles</h3>
+              <p class="mt-1 text-sm leading-6 text-slate-600">Gérer les assignations et suivre les évaluations</p>
+            </div>
           </div>
-          <div>
-        <h3 class="text-lg font-bold text-gray-900 group-hover:text-purple-600 transition-colors">Workflow Articles</h3>
-        <p class="text-gray-600 mt-1 text-sm">Gérer les assignations et suivre les évaluations</p>
-          </div>
+          <svg class="h-5 w-5 text-slate-400 transition-all group-hover:translate-x-0.5 group-hover:text-violet-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"></path>
+          </svg>
         </div>
       </a>
     </div>

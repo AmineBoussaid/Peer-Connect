@@ -1,82 +1,85 @@
-<div class="min-h-screen bg-slate-50 py-10 px-4">
-  <div class="app-container max-w-3xl mx-auto">
-    <h1 class="text-2xl font-semibold text-slate-900 mb-6">Profil Expert</h1>
+<div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8 px-4">
+  <div class="app-container max-w-4xl mx-auto">
+    <div class="mb-8">
+      <h1 class="text-base font-semibold tracking-tight text-slate-900 mb-1">Profil Expert</h1>
+      <p class="text-xs text-slate-500">Mettez à jour vos domaines d’expertise et votre CV.</p>
+    </div>
+
     <div class="card card-body mb-6">
       <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-200">
-        <div class="h-14 w-14 rounded-xl bg-sky-100 flex items-center justify-center text-2xl shadow-soft">👤</div>
+        <div class="h-14 w-14 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
+          <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75a17.933 17.933 0 0 1-7.5-1.632Z"/></svg>
+        </div>
         <div>
-          <p class="text-base font-semibold text-slate-900">{{ user?.nom }}</p>
+          <p class="text-sm font-semibold text-slate-900">{{ user?.nom }}</p>
           <p class="text-slate-600 text-sm">{{ user?.email }}</p>
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="p-4 bg-sky-50 rounded-xl border border-sky-200">
+        <div class="rounded-xl border border-sky-200 bg-sky-50 p-4">
           <p class="text-xs font-semibold uppercase text-sky-600 mb-1">Assignations</p>
-          <p class="text-2xl font-semibold text-sky-700">{{ assignmentsCount }}</p>
+          <p class="text-2xl font-bold text-sky-700">{{ assignmentsCount }}</p>
         </div>
-        <div class="p-4 bg-sky-50 rounded-xl border border-sky-200">
-          <p class="text-xs font-semibold uppercase text-sky-600 mb-1">Reviews</p>
-          <p class="text-2xl font-semibold text-sky-700">{{ reviewsCount }}</p>
+        <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+          <p class="text-xs font-semibold uppercase text-emerald-600 mb-1">Évaluations</p>
+          <p class="text-2xl font-bold text-emerald-700">{{ reviewsCount }}</p>
         </div>
-        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
           <p class="text-xs font-semibold uppercase text-slate-600 mb-1">CV</p>
-          <p class="text-sm" *ngIf="cv; else nocv"><a [href]="cv" target="_blank" class="text-primary-600 font-medium">Voir le CV</a></p>
+          <p class="text-sm" *ngIf="cv; else nocv"><a [href]="cv" target="_blank" class="text-primary-600 font-semibold">Voir le CV</a></p>
           <ng-template #nocv><span class="text-slate-500">Non importé</span></ng-template>
         </div>
       </div>
     </div>
 
-    <!-- Domaines d'expertise Section -->
-    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-xl font-bold text-gray-900">Domaines d'expertise</h3>
-        <button *ngIf="!editingDomains" (click)="startEditingDomains()" class="px-4 py-2 rounded-md bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-medium">
-          ✏️ Modifier
+    <div class="card card-body mb-6">
+      <div class="flex items-center justify-between mb-4 gap-3">
+        <h3 class="text-base font-semibold text-slate-900">Domaines d'expertise</h3>
+        <button *ngIf="!editingDomains" (click)="startEditingDomains()" class="btn btn-primary text-sm">
+          Modifier
         </button>
       </div>
 
-      <!-- Display mode -->
       <div *ngIf="!editingDomains">
         <div *ngIf="selectedDomains.length > 0" class="flex flex-wrap gap-2">
-          <span *ngFor="let domain of selectedDomains" class="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-sm font-medium">
+          <span *ngFor="let domain of selectedDomains" class="inline-flex items-center px-3 py-1 rounded-full bg-cyan-100 text-cyan-700 text-sm font-semibold">
             {{ domain }}
           </span>
         </div>
-        <p *ngIf="selectedDomains.length === 0" class="text-gray-500 italic">Aucun domaine d'expertise défini</p>
+        <p *ngIf="selectedDomains.length === 0" class="text-slate-500 italic">Aucun domaine d'expertise défini</p>
       </div>
 
-      <!-- Edit mode -->
       <div *ngIf="editingDomains">
-        <p class="text-sm text-gray-600 mb-3">Sélectionnez vos domaines d'expertise (plusieurs choix possibles) :</p>
+        <p class="text-sm text-slate-600 mb-3">Sélectionnez vos domaines d'expertise (plusieurs choix possibles) :</p>
         <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mb-4">
-          <button *ngFor="let domain of availableDomains" 
-                  type="button"
-                  (click)="toggleDomainSelection(domain)"
-                  [class]="isDomainSelected(domain) 
-                    ? 'px-3 py-2 border-2 border-cyan-500 bg-cyan-50 text-cyan-700 rounded-lg text-sm font-medium transition-all' 
-                    : 'px-3 py-2 border-2 border-gray-300 bg-white text-gray-700 rounded-lg text-sm hover:border-cyan-300 transition-all'">
-            <span *ngIf="isDomainSelected(domain)">✓</span> {{ domain }}
+          <button
+            *ngFor="let domain of availableDomains"
+            type="button"
+            (click)="toggleDomainSelection(domain)"
+            [class]="isDomainSelected(domain)
+              ? 'px-3 py-2 border-2 border-cyan-500 bg-cyan-50 text-cyan-700 rounded-lg text-sm font-semibold transition-all'
+              : 'px-3 py-2 border-2 border-slate-300 bg-white text-slate-700 rounded-lg text-sm hover:border-cyan-300 transition-all'"
+          >
+            <span *ngIf="isDomainSelected(domain)">•</span> {{ domain }}
           </button>
         </div>
-        <div class="flex gap-3">
-          <button (click)="saveDomains()" class="px-4 py-2 rounded-md bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-medium">
-            💾 Enregistrer
-          </button>
-          <button (click)="cancelEditingDomains()" class="px-4 py-2 rounded-md bg-gray-300 hover:bg-gray-400 text-gray-800 text-sm font-medium">
-            Annuler
-          </button>
+        <div class="flex flex-wrap gap-3">
+          <button (click)="saveDomains()" class="btn btn-primary text-sm">Enregistrer</button>
+          <button (click)="cancelEditingDomains()" class="btn btn-secondary text-sm">Annuler</button>
         </div>
       </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow-md p-6">
-      <h3 class="text-xl font-bold text-gray-900 mb-3">{{ cv ? 'Mettre à jour le CV' : 'Importer le CV' }}</h3>
-      <div class="flex items-center gap-3">
-        <input type="file" accept=".pdf,.doc,.docx" (change)="onCvSelected($event)" class="block w-full" [disabled]="uploading" />
-        <button (click)="saveCv()" [disabled]="uploading || !selectedFile" class="px-4 py-2 rounded-md bg-cyan-600 hover:bg-cyan-700 disabled:bg-gray-400 text-white text-sm font-medium">Sauvegarder</button>
+    <div class="card card-body">
+      <h3 class="text-base font-semibold text-slate-900 mb-2">{{ cv ? 'Mettre à jour le CV' : 'Importer le CV' }}</h3>
+      <div class="flex flex-col md:flex-row items-start md:items-center gap-3">
+        <input type="file" accept=".pdf,.doc,.docx" (change)="onCvSelected($event)" class="block w-full text-sm" [disabled]="uploading" />
+        <button (click)="saveCv()" [disabled]="uploading || !selectedFile" class="btn btn-primary disabled:opacity-60 disabled:cursor-not-allowed">
+          Sauvegarder
+        </button>
       </div>
-      <p class="text-sm text-gray-500 mt-2" *ngIf="uploading">Import en cours...</p>
-      <p class="text-sm text-green-600 mt-2" *ngIf="cv && !uploading && !selectedFile">✓ CV importé avec succès</p>
+      <p class="text-sm text-slate-500 mt-2" *ngIf="uploading">Import en cours...</p>
+      <p class="text-sm text-emerald-600 mt-2" *ngIf="cv && !uploading && !selectedFile">CV importé avec succès</p>
     </div>
   </div>
 </div>

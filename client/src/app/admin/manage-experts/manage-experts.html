@@ -1,188 +1,166 @@
-<div class="min-h-screen bg-gray-50 py-8 px-4">
-  <div class="max-w-7xl mx-auto">
-    <!-- Header -->
-    <div class="mb-7">
-      <h2 class="text-2xl font-bold text-gray-900 mb-1">Gérer les Experts</h2>
-      <p class="text-gray-600 text-sm">Gérez la disponibilité, les scores et les domaines d'expertise</p>
+<div class="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 px-4 py-8 sm:px-6 lg:px-8">
+  <div class="mx-auto w-full max-w-7xl space-y-4">
+    <div class="px-0 py-0">
+      <h2 class="text-base font-semibold tracking-tight text-slate-900">Gérer les Experts</h2>
+      <p class="mt-1 text-xs text-slate-500">Gérez la disponibilité, les scores et les domaines d'expertise</p>
     </div>
-    
-    <!-- Filtres et recherche -->
-    <div class="bg-white rounded-lg shadow-md p-5 mb-6">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="md:col-span-2">
-          <label class="block text-sm font-medium text-gray-700 mb-2">Recherche</label>
-          <input type="text" 
-                 [(ngModel)]="searchTerm" 
-                 (ngModelChange)="applyFilters()"
-                 placeholder="🔍 Rechercher par nom, email ou domaine..."
-                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+
+    <div class="rounded-2xl border border-slate-200/80 bg-white p-3 shadow-sm sm:p-4">
+      <div class="grid grid-cols-1 gap-2.5 md:grid-cols-12 md:items-end">
+        <div class="md:col-span-6">
+          <label class="mb-1 block text-[11px] font-medium uppercase tracking-wide text-slate-500">Recherche</label>
+          <div class="relative">
+            <svg class="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m1.6-5.15a6.75 6.75 0 1 1-13.5 0 6.75 6.75 0 0 1 13.5 0Z"></path>
+            </svg>
+            <input
+              type="text"
+              [(ngModel)]="searchTerm"
+              (ngModelChange)="applyFilters()"
+              placeholder="Rechercher par nom, email ou domaine..."
+              class="w-full rounded-lg border border-slate-300 bg-white py-1 pl-8 pr-2.5 text-[11px] text-slate-900 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+            >
+          </div>
         </div>
-        
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Disponibilité</label>
-          <select [(ngModel)]="filterDisponibilite" (ngModelChange)="applyFilters()"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+
+        <div class="md:col-span-3">
+          <label class="mb-1 block text-[11px] font-medium uppercase tracking-wide text-slate-500">Disponibilité</label>
+          <select
+            [(ngModel)]="filterDisponibilite"
+            (ngModelChange)="applyFilters()"
+            class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-[11px] text-slate-900 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+          >
             <option value="all">Tous les experts</option>
             <option value="available">Disponibles uniquement</option>
             <option value="unavailable">Non disponibles</option>
           </select>
         </div>
-      </div>
-      
-      <div class="mt-4">
-        <label class="block text-sm font-medium text-gray-700 mb-2">Tri</label>
-        <select [(ngModel)]="sortBy" (ngModelChange)="applyFilters()"
-                class="w-full md:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+
+      <div class="md:col-span-3">
+        <label class="mb-1 block text-[11px] font-medium uppercase tracking-wide text-slate-500">Tri</label>
+        <select
+          [(ngModel)]="sortBy"
+          (ngModelChange)="applyFilters()"
+          class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-[11px] text-slate-900 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+        >
           <option value="score">Trier par score</option>
           <option value="name">Trier par nom</option>
-          <option value="reviews">Trier par nb reviews</option>
+          <option value="reviews">Trier par nb évaluations</option>
         </select>
       </div>
+      </div>
     </div>
-    
-    <!-- Statistiques -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
-      <div class="bg-white rounded-lg shadow-md p-5 border-l-4 border-indigo-500">
-        <div class="flex items-center justify-between">
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div class="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm">
+        <div class="flex items-center justify-between gap-3">
           <div>
-            <p class="text-gray-500 text-sm font-medium uppercase">Total Experts</p>
-            <p class="text-2xl font-bold text-gray-900 mt-1">{{ experts.length }}</p>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Total Experts</p>
+            <p class="mt-2 text-3xl font-semibold tracking-tight text-indigo-600">{{ experts.length }}</p>
           </div>
-          <div class="bg-indigo-100 rounded-full p-2.5">
-            <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          <div class="rounded-xl bg-indigo-50 p-3 text-indigo-600 ring-1 ring-indigo-100">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 18a4 4 0 1 0-8 0m8 0H8m8 0h3v-1a4 4 0 0 0-3-3.87M8 8a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z"></path>
             </svg>
           </div>
         </div>
       </div>
-
-      <div class="bg-white rounded-lg shadow-md p-5 border-l-4 border-green-500">
-        <div class="flex items-center justify-between">
+      <div class="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm">
+        <div class="flex items-center justify-between gap-3">
           <div>
-            <p class="text-gray-500 text-sm font-medium uppercase">Disponibles</p>
-            <p class="text-2xl font-bold text-gray-900 mt-1">{{ getAvailableCount() }}</p>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Disponibles</p>
+            <p class="mt-2 text-3xl font-semibold tracking-tight text-emerald-600">{{ getAvailableCount() }}</p>
           </div>
-          <div class="bg-green-100 rounded-full p-2.5">
-            <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          <div class="rounded-xl bg-emerald-50 p-3 text-emerald-600 ring-1 ring-emerald-100">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m8.5 12.5 2.5 2.5 4.5-5m5.5 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
             </svg>
           </div>
         </div>
       </div>
-
-      <div class="bg-white rounded-lg shadow-md p-5 border-l-4 border-purple-500">
-        <div class="flex items-center justify-between">
+      <div class="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm">
+        <div class="flex items-center justify-between gap-3">
           <div>
-            <p class="text-gray-500 text-sm font-medium uppercase">Affichés</p>
-            <p class="text-2xl font-bold text-gray-900 mt-1">{{ filteredExperts.length }}</p>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Affichés</p>
+            <p class="mt-2 text-3xl font-semibold tracking-tight text-violet-600">{{ filteredExperts.length }}</p>
           </div>
-          <div class="bg-purple-100 rounded-full p-2.5">
-            <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+          <div class="rounded-xl bg-violet-50 p-3 text-violet-600 ring-1 ring-violet-100">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M7 12h10M10 18h4"></path>
             </svg>
           </div>
         </div>
       </div>
     </div>
-    
-    <!-- Liste des experts -->
-    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+
+    <div class="overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-sm">
       <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
+        <table class="min-w-full divide-y divide-slate-200 text-sm">
+          <thead class="bg-slate-50">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Domaines</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Score</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assignations</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reviews</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Disponibilité</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Nom</th>
+              <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Email</th>
+              <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Domaines</th>
+              <th class="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-slate-500">Score</th>
+              <th class="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-slate-500">Assignations</th>
+              <th class="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-slate-500">Évaluations</th>
+              <th class="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-slate-500">Disponibilité</th>
+              <th class="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-slate-500">Actions</th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
-            <tr *ngFor="let expert of filteredExperts" class="hover:bg-gray-50 transition-colors">
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-gray-900">{{ expert.nom }}</div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-500">{{ expert.email }}</div>
-              </td>
-              <td class="px-6 py-4">
-                <div class="text-sm text-gray-900">{{ expert.domaines_expertise || 'Non spécifié' }}</div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div *ngIf="editingScore !== expert.id_utilisateur" class="flex items-center space-x-2">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                    ⭐ {{ expert.score_credibilite || 0 }}
+          <tbody class="divide-y divide-slate-100 bg-white">
+            <tr *ngFor="let expert of filteredExperts" class="transition-colors hover:bg-slate-50/70">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900">{{ expert.nom }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">{{ expert.email }}</td>
+              <td class="px-6 py-4 text-sm text-slate-700">{{ expert.domaines_expertise || 'Non spécifié' }}</td>
+              <td class="px-3 py-2 whitespace-nowrap">
+                <div *ngIf="editingScore !== expert.id_utilisateur" class="flex items-center gap-2">
+                  <span class="inline-flex items-center rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-800">
+                    {{ expert.score_credibilite || 0 }}
                   </span>
-                  <button (click)="startEditScore(expert)" 
-                          class="text-indigo-600 hover:text-indigo-900 transition-colors">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                  <button (click)="startEditScore(expert)" class="rounded-md p-1.5 text-indigo-600 transition hover:bg-indigo-50 hover:text-indigo-700">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m16.86 4.49 2.65 2.65M7.5 19.5l3.75-.75 8.26-8.26a1.875 1.875 0 0 0 0-2.65l-1.35-1.35a1.875 1.875 0 0 0-2.65 0l-8.26 8.26L6.5 18.5l1 1Z"></path>
                     </svg>
                   </button>
                 </div>
-                <div *ngIf="editingScore === expert.id_utilisateur" class="flex items-center space-x-2">
-                  <input type="number" 
-                         [(ngModel)]="newScore" 
-                         min="0" 
-                         max="10" 
-                         step="0.1"
-                         class="w-20 px-2 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                  <button (click)="saveScore(expert)" 
-                          class="inline-flex items-center px-2 py-1 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                    ✓
-                  </button>
-                  <button (click)="cancelEditScore()" 
-                          class="inline-flex items-center px-2 py-1 border border-gray-300 text-sm font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    ✗
-                  </button>
+                <div *ngIf="editingScore === expert.id_utilisateur" class="flex items-center gap-2">
+                  <input type="number" [(ngModel)]="newScore" min="0" max="10" step="0.1" class="w-20 rounded-lg border border-slate-300 px-2 py-1.5 text-sm text-slate-900 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100">
+                  <button (click)="saveScore(expert)" class="inline-flex items-center rounded-lg bg-emerald-600 px-2 py-1 text-xs font-medium text-white transition hover:bg-emerald-700">OK</button>
+                  <button (click)="cancelEditScore()" class="inline-flex items-center rounded-lg border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 transition hover:bg-slate-50">Annuler</button>
                 </div>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                  {{ expert.nb_assignations || 0 }}
-                </span>
+              <td class="px-3 py-2 whitespace-nowrap">
+                <span class="inline-flex items-center rounded-full bg-sky-100 px-2.5 py-1 text-xs font-semibold text-sky-800">{{ expert.nb_assignations || 0 }}</span>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                  {{ expert.nb_reviews || 0 }}
-                </span>
+              <td class="px-3 py-2 whitespace-nowrap">
+                <span class="inline-flex items-center rounded-full bg-violet-100 px-2.5 py-1 text-xs font-semibold text-violet-800">{{ expert.nb_reviews || 0 }}</span>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <button (click)="toggleDisponibilite(expert)"
-                        [class]="expert.disponibilite === 1 
-                          ? 'inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors'
-                          : 'inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors'">
-                  {{ expert.disponibilite === 1 ? '✓ Disponible' : '✗ Indisponible' }}
+              <td class="px-3 py-2 whitespace-nowrap">
+                <button
+                  (click)="toggleDisponibilite(expert)"
+                  [class]="expert.disponibilite === 1
+                    ? 'inline-flex items-center rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-emerald-700'
+                    : 'inline-flex items-center rounded-lg bg-rose-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-rose-700'"
+                >
+                  {{ expert.disponibilite === 1 ? 'Disponible' : 'Indisponible' }}
                 </button>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                <a [routerLink]="['/admin/user', expert.id_utilisateur]"
-                   class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors mr-2">
-                  Détails
-                </a>
-                <a *ngIf="expert.cv" 
-                   [href]="getCvUrl(expert.cv)"
-                   target="_blank"
-                   title="Voir le CV"
-                   class="inline-flex items-center px-3 py-1.5 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
-                  CV
-                </a>
+              <td class="px-3 py-2 whitespace-nowrap text-sm font-medium">
+                <a [routerLink]="['/admin/user', expert.id_utilisateur]" class="mr-2 inline-flex items-center rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-indigo-700">Détails</a>
+                <a *ngIf="expert.cv" [href]="getCvUrl(expert.cv)" target="_blank" title="Voir le CV" class="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-50">CV</a>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      
-      <div *ngIf="filteredExperts.length === 0" class="text-center py-12">
-        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+
+      <div *ngIf="filteredExperts.length === 0" class="py-12 text-center">
+        <svg class="mx-auto h-12 w-12 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l6 6m-2.5-10a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"></path>
         </svg>
-        <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun résultat</h3>
-        <p class="mt-1 text-sm text-gray-500">Aucun expert ne correspond à votre recherche.</p>
+        <h3 class="mt-3 text-sm font-semibold text-slate-900">Aucun résultat</h3>
+        <p class="mt-1 text-sm text-slate-500">Aucun expert ne correspond à votre recherche.</p>
       </div>
     </div>
   </div>

@@ -6,11 +6,13 @@ const Expert = require('../models/expert.model');
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) {
+    const normalizedEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
+
+    if (!normalizedEmail || !password) {
       return res.status(400).json({ message: 'Email et mot de passe requis' });
     }
 
-    const user = await Utilisateur.findByEmail(email);
+    const user = await Utilisateur.findByEmail(normalizedEmail);
     if (!user) {
       return res.status(401).json({ message: 'Identifiants invalides' });
     }

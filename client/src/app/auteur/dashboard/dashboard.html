@@ -1,45 +1,51 @@
-<div class="min-h-screen bg-slate-50 py-10 px-4">
-  <div class="app-container">
-  <div class="mb-8">
-    <h1 class="text-2xl font-semibold text-slate-900 mb-1">Espace Auteur</h1>
-      <p class="text-slate-600">Créez, gérez et soumettez vos articles pour révision par les pairs</p>
+<div class="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 px-4 py-8 sm:px-6 lg:px-8">
+  <div class="mx-auto w-full max-w-6xl">
+    <div class="mb-6 px-0 py-0">
+      <div class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-700">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+        Espace auteur
+      </div>
+      <h1 class="mt-2 text-base font-semibold tracking-tight text-slate-900">Espace Auteur</h1>
+      <p class="mt-1 text-xs text-slate-500">Créez, gérez et soumettez vos articles pour révision par les pairs</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <a routerLink="/auteur/my-articles" 
-         class="group card card-body hover:shadow-soft transition-all hover:-translate-y-1">
-        <div class="flex items-start justify-between">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <a routerLink="/auteur/my-articles" class="group rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-xl">
+        <div class="flex items-start justify-between gap-4">
           <div>
-      <h2 class="text-lg font-semibold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">Mes Articles</h2>
-      <p class="text-slate-600 text-sm mb-3">Créez, modifiez et gérez tous vos articles en brouillon ou soumis</p>
-            <div class="flex items-center text-primary-600 font-semibold group-hover:translate-x-1 transition-transform">
+            <h2 class="text-lg font-semibold text-slate-900 transition-colors group-hover:text-emerald-600">Mes Articles</h2>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Créez, modifiez et gérez tous vos articles en brouillon ou soumis</p>
+            <div class="mt-4 flex items-center text-sm font-semibold text-emerald-600 transition-transform group-hover:translate-x-0.5">
               Accéder
-              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              <svg class="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"></path>
               </svg>
             </div>
           </div>
-      <div class="bg-emerald-100 rounded-xl p-2.5 group-hover:bg-emerald-200 transition-colors">
-      <span class="text-xl">📚</span>
+          <div class="rounded-2xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-3 ring-1 ring-emerald-100">
+            <svg class="h-7 w-7 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 4.75A1.75 1.75 0 0 1 8.75 3h6.88c.46 0 .9.18 1.23.51l2.63 2.63c.33.33.51.77.51 1.23v11.88A1.75 1.75 0 0 1 18.25 21h-9.5A1.75 1.75 0 0 1 7 19.25V4.75Zm3 6.25h4m-4 3h6"></path>
+            </svg>
           </div>
         </div>
       </a>
 
-      <a routerLink="/auteur/submit-article" 
-         class="group card card-body hover:shadow-soft transition-all hover:-translate-y-1">
-        <div class="flex items-start justify-between">
+      <a routerLink="/auteur/submit-article" class="group rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-sky-200 hover:shadow-xl">
+        <div class="flex items-start justify-between gap-4">
           <div>
-        <h2 class="text-lg font-semibold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">Soumettre pour Review</h2>
-        <p class="text-slate-600 text-sm mb-3">Sélectionnez un article et assignez-le à un expert pour révision</p>
-            <div class="flex items-center text-primary-600 font-semibold group-hover:translate-x-1 transition-transform">
+            <h2 class="text-lg font-semibold text-slate-900 transition-colors group-hover:text-sky-600">Soumettre pour évaluation</h2>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Sélectionnez un article et assignez-le à un expert pour révision</p>
+            <div class="mt-4 flex items-center text-sm font-semibold text-sky-600 transition-transform group-hover:translate-x-0.5">
               Commencer
-              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              <svg class="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"></path>
               </svg>
             </div>
           </div>
-        <div class="bg-sky-100 rounded-xl p-2.5 group-hover:bg-sky-200 transition-colors">
-        <span class="text-xl">✍️</span>
+          <div class="rounded-2xl bg-gradient-to-br from-sky-500/10 to-indigo-500/10 p-3 ring-1 ring-sky-100">
+            <svg class="h-7 w-7 text-sky-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 19h9m-9 0L4.5 11.5a2.121 2.121 0 1 1 3-3L15 16m-3 3v-7m0 0 4-4m-4 4-4-4"></path>
+            </svg>
           </div>
         </div>
       </a>

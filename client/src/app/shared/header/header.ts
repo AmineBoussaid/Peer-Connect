@@ -51,16 +51,6 @@ export class HeaderComponent {
   }
 
   getActiveClasses() {
-    // Return role-colored underline for active links
-    switch (this.role) {
-      case 'auteur':
-        return ['active', 'border-emerald-600', 'text-emerald-700'];
-      case 'expert':
-        return ['active', 'border-cyan-600', 'text-cyan-700'];
-      case 'admin':
-        return ['active', 'border-indigo-600', 'text-indigo-700'];
-      default:
-        return ['active', 'border-gray-600', 'text-gray-700'];
-    }
+    return ['active', 'bg-primary-100', 'text-primary-800', 'ring-1', 'ring-primary-200'];
   }
 }
