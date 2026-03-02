@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 px-4 py-8 sm:px-6 lg:px-8">
+<div class="min-h-screen bg-gradient-to-b from-orange-50 via-amber-50 to-orange-50 px-4 py-8 sm:px-6 lg:px-8">
   <div class="mx-auto w-full max-w-7xl space-y-4">
     <div class="px-0 py-0">
       <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -6,7 +6,7 @@
           <h2 class="text-base font-semibold tracking-tight text-slate-900">Tous les utilisateurs</h2>
           <p class="mt-1 text-xs text-slate-500">Liste des utilisateurs avec leurs infos</p>
         </div>
-        <button class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-indigo-700" (click)="load()">
+        <button class="inline-flex items-center gap-1.5 rounded-lg bg-orange-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-orange-700" (click)="load()">
           <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5m11 6v5h-5M20 9a8 8 0 0 0-13.66-5.66L4 5m16 14-2.34 1.66A8 8 0 0 1 4 15"></path>
           </svg>
@@ -21,9 +21,9 @@
           <svg class="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m1.6-5.15a6.75 6.75 0 1 1-13.5 0 6.75 6.75 0 0 1 13.5 0Z"></path>
           </svg>
-          <input type="text" [(ngModel)]="filter" placeholder="Recherche (nom ou email)" class="w-full rounded-lg border border-slate-300 bg-white py-1.5 pl-8 pr-3 text-xs text-slate-900 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100">
+          <input type="text" [(ngModel)]="filter" placeholder="Recherche (nom ou email)" class="w-full rounded-lg border border-slate-300 bg-white py-1.5 pl-8 pr-3 text-xs text-slate-900 outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100">
         </div>
-        <select [(ngModel)]="roleFilter" class="sm:w-44 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs text-slate-900 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100">
+        <select [(ngModel)]="roleFilter" class="sm:w-44 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs text-slate-900 outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100">
           <option value="all">Tous les rôles</option>
           <option value="admin">Admin</option>
           <option value="expert">Expert</option>
@@ -52,7 +52,7 @@
               </span>
             </td>
             <td class="px-4 py-3">
-              <button (click)="viewDetails(u.id_utilisateur)" class="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-indigo-700">
+              <button (click)="viewDetails(u.id_utilisateur)" class="rounded-lg bg-orange-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-orange-700">
                 Détails
               </button>
             </td>

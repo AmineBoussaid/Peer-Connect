@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/header/header';
 
 @Component({
@@ -9,4 +9,11 @@ import { HeaderComponent } from './shared/header/header';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(private router: Router) {}
+
+  isDashboardRoute(): boolean {
+    const path = this.router.url.split('?')[0];
+    return path.startsWith('/admin') || path.startsWith('/auteur') || path.startsWith('/expert');
+  }
+}

@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 px-4 py-8 sm:px-6 lg:px-8">
+<div class="min-h-screen bg-gradient-to-b from-orange-50 via-amber-50 to-orange-50 px-4 py-8 sm:px-6 lg:px-8">
   <div class="mx-auto w-full max-w-7xl space-y-4">
     <div class="px-0 py-0">
       <h2 class="text-base font-semibold tracking-tight text-slate-900">Workflow des Articles</h2>
@@ -13,13 +13,13 @@
             <svg class="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
               <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m1.6-5.15a6.75 6.75 0 1 1-13.5 0 6.75 6.75 0 0 1 13.5 0Z"></path>
             </svg>
-            <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="applyFilters()" placeholder="Rechercher par titre, auteur ou résumé..." class="w-full rounded-lg border border-slate-300 bg-white py-1 pl-8 pr-2.5 text-[11px] text-slate-900 outline-none transition focus:border-violet-400 focus:ring-2 focus:ring-violet-100">
+            <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="applyFilters()" placeholder="Rechercher par titre, auteur ou résumé..." class="w-full rounded-lg border border-slate-300 bg-white py-1 pl-8 pr-2.5 text-[11px] text-slate-900 outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100">
           </div>
         </div>
 
         <div class="md:col-span-3">
           <label class="mb-1 block text-[11px] font-medium uppercase tracking-wide text-slate-500">Statut assignation</label>
-          <select [(ngModel)]="filterStatut" (ngModelChange)="applyFilters()" class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-[11px] text-slate-900 outline-none transition focus:border-violet-400 focus:ring-2 focus:ring-violet-100">
+          <select [(ngModel)]="filterStatut" (ngModelChange)="applyFilters()" class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-[11px] text-slate-900 outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100">
             <option value="all">Tous les statuts</option>
             <option *ngFor="let s of statutOptions" [value]="s.value">{{ s.label }}</option>
           </select>
@@ -27,7 +27,7 @@
 
         <div class="md:col-span-3">
         <label class="mb-1 block text-[11px] font-medium uppercase tracking-wide text-slate-500">Tri</label>
-        <select [(ngModel)]="sortBy" (ngModelChange)="applyFilters()" class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-[11px] text-slate-900 outline-none transition focus:border-violet-400 focus:ring-2 focus:ring-violet-100">
+        <select [(ngModel)]="sortBy" (ngModelChange)="applyFilters()" class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-[11px] text-slate-900 outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100">
           <option value="date">Trier par date</option>
           <option value="title">Trier par titre</option>
           <option value="author">Trier par auteur</option>

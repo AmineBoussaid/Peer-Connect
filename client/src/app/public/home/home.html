@@ -1,0 +1,189 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
+  <!-- Subtle decorative gradients -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-orange-100/30 blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-blue-50/20 blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="flex items-center justify-between px-6 py-5 md:px-12 md:py-6 border-b border-slate-200/50">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-white border border-slate-200 p-1.5 shadow-md">
+          <img src="/images/logo.png" alt="PeerConnect logo" class="w-full h-full object-contain" />
+        </div>
+        <div>
+          <p class="text-slate-900 font-bold tracking-tight text-sm">PeerConnect</p>
+          <p class="text-xs text-slate-500">Research Collaboration</p>
+        </div>
+      </div>
+
+      <a routerLink="/auth" class="inline-flex items-center justify-center rounded-lg bg-orange-600 hover:bg-orange-700 px-4 py-2 text-sm font-semibold text-white transition shadow-md hover:shadow-lg">
+        Sign In
+      </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col items-center justify-center px-6 py-20 md:px-12 md:py-32">
+      <!-- Hero Section -->
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-orange-200 bg-orange-50/40 mb-6">
+          <div class="w-2 h-2 rounded-full bg-orange-600"></div>
+          <span class="text-xs font-medium text-orange-700">Leading Peer Review Platform</span>
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="text-5xl md:text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
+          Streamline Your <span class="text-orange-600">Peer Review</span> Process
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-lg md:text-xl text-slate-600 mb-8 leading-relaxed max-w-2xl mx-auto">
+          PeerConnect connects researchers, authors, and experts in a unified platform for transparent, structured, and efficient peer review workflows.
+        </p>
+
+        <!-- Primary CTA -->
+        <a routerLink="/auth" class="inline-flex items-center justify-center gap-2 px-8 py-3 md:px-10 md:py-4 rounded-lg bg-orange-600 hover:bg-orange-700 text-white font-semibold transition shadow-lg hover:shadow-xl mb-16">
+          <span>Get Started Free</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+
+        <!-- Trust Metrics -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-8 md:gap-16 mb-20 text-sm text-slate-600">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+              <svg class="w-5 h-5 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <span>Multi-role Collaboration</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+              <svg class="w-5 h-5 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <span>Structured Workflows</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+              <svg class="w-5 h-5 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <span>Enterprise Security</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Cards -->
+      <div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+        <!-- Admin Card -->
+        <div class="group p-6 rounded-xl border border-slate-200 bg-white hover:border-orange-200 hover:shadow-lg transition">
+          <div class="w-12 h-12 rounded-lg bg-orange-100 flex items-center justify-center mb-4 group-hover:bg-orange-200 transition">
+            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Admin</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Manage users, assign experts to papers, track workflow progress, and make final review decisions from a unified dashboard.
+          </p>
+        </div>
+
+        <!-- Author Card -->
+        <div class="group p-6 rounded-xl border border-slate-200 bg-white hover:border-orange-200 hover:shadow-lg transition">
+          <div class="w-12 h-12 rounded-lg bg-orange-100 flex items-center justify-center mb-4 group-hover:bg-orange-200 transition">
+            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 11-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 01-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Author</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Submit your research papers, track their review status in real-time, and receive feedback from expert reviewers.
+          </p>
+        </div>
+
+        <!-- Expert Card -->
+        <div class="group p-6 rounded-xl border border-slate-200 bg-white hover:border-orange-200 hover:shadow-lg transition">
+          <div class="w-12 h-12 rounded-lg bg-orange-100 flex items-center justify-center mb-4 group-hover:bg-orange-200 transition">
+            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Expert</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Review assigned papers with structured scoring forms, provide detailed feedback, and make recommendations.
+          </p>
+        </div>
+      </div>
+
+      <!-- Core Features Section -->
+      <div class="w-full max-w-5xl">
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-10 text-center">Why Choose PeerConnect?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 rounded-lg border border-slate-200 bg-white">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <div>
+                <h4 class="font-semibold text-slate-900 text-sm mb-1">Structured Workflows</h4>
+                <p class="text-xs text-slate-600">Define clear submission, review, and decision processes.</p>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 rounded-lg border border-slate-200 bg-white">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <div>
+                <h4 class="font-semibold text-slate-900 text-sm mb-1">Role-Based Access</h4>
+                <p class="text-xs text-slate-600">Secure permissions for Admins, Authors, and Experts.</p>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 rounded-lg border border-slate-200 bg-white">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <div>
+                <h4 class="font-semibold text-slate-900 text-sm mb-1">Real-Time Tracking</h4>
+                <p class="text-xs text-slate-600">Monitor paper status, reviews, and decisions instantly.</p>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 rounded-lg border border-slate-200 bg-white">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <div>
+                <h4 class="font-semibold text-slate-900 text-sm mb-1">Comprehensive Scoring</h4>
+                <p class="text-xs text-slate-600">Structured evaluation forms with detailed ratings.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200/50 px-6 py-8 md:px-12 bg-white/40">
+      <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-slate-600">
+          &copy; 2026 PeerConnect. Professional peer review, simplified.
+        </p>
+        <a routerLink="/auth" class="inline-flex items-center justify-center px-5 py-2 rounded-lg border border-orange-200 bg-orange-50 hover:bg-orange-100 text-orange-700 text-sm font-medium transition">
+          Get Started
+        </a>
+      </div>
+    </footer>
+  </div>
+</div>

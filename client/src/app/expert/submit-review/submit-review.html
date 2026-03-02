@@ -1,203 +1,231 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8 px-4">
-  <div class="app-container max-w-5xl mx-auto">
-    <div class="mb-7">
-      <h2 class="text-base font-semibold tracking-tight text-slate-900 mb-1">{{ isEditMode ? "Modifier l'évaluation" : 'Soumettre une évaluation' }}</h2>
-      <p class="text-xs text-slate-500">Évaluez l'article de manière objective et constructive.</p>
-    </div>
-
-    <div class="card card-body mb-6" *ngIf="assignment">
-      <h3 class="text-base font-semibold text-slate-900 mb-3">Article à évaluer</h3>
-      <div class="space-y-3">
-        <div>
-          <p class="text-sm text-slate-600 font-medium">Titre</p>
-          <p class="text-slate-900 font-semibold">{{ assignment.article_titre }}</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <p class="text-sm text-slate-600 font-medium">Auteur</p>
-            <p class="text-slate-900">{{ assignment.auteur_nom }}</p>
-          </div>
-          <div>
-            <p class="text-sm text-slate-600 font-medium">Date de soumission</p>
-            <p class="text-slate-900">{{ assignment.article_date_soumission | date:'dd/MM/yyyy' }}</p>
-          </div>
-          <div *ngIf="assignment.date_limite">
-            <p class="text-sm text-slate-600 font-medium">Date limite</p>
-            <p class="text-slate-900">{{ assignment.date_limite | date:'dd/MM/yyyy' }}</p>
-          </div>
-        </div>
-        <div *ngIf="assignment.article_resume">
-          <p class="text-sm text-slate-600 font-medium">Résumé</p>
-          <p class="text-slate-900">{{ assignment.article_resume }}</p>
-        </div>
-        <div *ngIf="assignment.article_mots_cles">
-          <p class="text-sm text-slate-600 font-medium">Mots-clés</p>
-          <p class="text-slate-900">{{ assignment.article_mots_cles }}</p>
-        </div>
-        <div *ngIf="assignment.article_fichier_pdf">
-          <a [href]="getPdfUrl(assignment.article_fichier_pdf)" target="_blank" class="btn btn-primary text-xs">
-            Télécharger le PDF
-          </a>
-        </div>
+<div class="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50 py-5 px-4">
+  <div class="app-container max-w-[1500px] mx-auto">
+    <div class="mb-4 flex items-start gap-3">
+      <div class="h-10 w-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center ring-1 ring-sky-200">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 2.651 2.651M7.5 19.5l3.75-.75 8.263-8.263a1.875 1.875 0 0 0 0-2.651l-1.35-1.35a1.875 1.875 0 0 0-2.651 0L7.25 14.75 6.5 18.5l1 1Z"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="text-base font-semibold tracking-tight text-slate-900">{{ isEditMode ? "Modifier l'évaluation" : 'Soumettre une évaluation' }}</h2>
+        <p class="text-xs text-slate-500">Évaluez l'article de manière objective et constructive.</p>
       </div>
     </div>
 
-    <div class="card card-body mb-6" *ngIf="assignment">
-      <h3 class="text-base font-semibold text-slate-900 mb-4">Votre évaluation</h3>
+    <div class="grid grid-cols-1 lg:grid-cols-10 gap-3" *ngIf="assignment">
+      <aside class="lg:col-span-3 rounded-2xl border border-slate-200/80 bg-white p-3 shadow-sm h-fit lg:sticky lg:top-5">
+        <div class="flex items-center gap-2 pb-2.5 border-b border-slate-200">
+          <svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 4.75A1.75 1.75 0 0 1 8.75 3h6.88c.46 0 .9.18 1.23.51l2.63 2.63c.33.33.51.77.51 1.23v11.88A1.75 1.75 0 0 1 18.25 21h-9.5A1.75 1.75 0 0 1 7 19.25V4.75Zm3 6.25h4m-4 3h6m-6 3h6"/>
+          </svg>
+          <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-700">Article à évaluer</h3>
+        </div>
 
-      <div class="space-y-6 mb-6">
-        <div class="rounded-xl border border-slate-200 p-4">
-          <h4 class="font-semibold text-slate-900 mb-2">1. Qualité scientifique *</h4>
-          <p class="text-sm text-slate-600 mb-4">Évaluez la rigueur méthodologique, la solidité des résultats et la pertinence scientifique.</p>
-          <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+        <div class="space-y-2 pt-2 text-sm">
+          <div>
+            <p class="text-[10px] font-normal uppercase tracking-wide text-slate-500">Titre</p>
+            <p class="mt-0.5 text-[13px] text-slate-900 font-medium leading-5">{{ assignment.article_titre }}</p>
+          </div>
+
+          <div>
+            <p class="text-[10px] font-normal uppercase tracking-wide text-slate-500">Auteur</p>
+            <p class="mt-0.5 text-[13px] text-slate-800 font-medium">{{ assignment.auteur_nom }}</p>
+          </div>
+
+          <div class="grid gap-2" [class.grid-cols-2]="assignment.date_limite" [class.grid-cols-1]="!assignment.date_limite">
+            <div>
+              <p class="text-[10px] font-normal uppercase tracking-wide text-slate-500">Date de soumission</p>
+              <p class="mt-0.5 text-[13px] text-slate-800 font-medium">{{ assignment.article_date_soumission | date:'dd/MM/yyyy' }}</p>
+            </div>
+
+            <div *ngIf="assignment.date_limite">
+              <p class="text-[10px] font-normal uppercase tracking-wide text-slate-500">Date limite</p>
+              <p class="mt-0.5 text-[13px] text-slate-800 font-medium">{{ assignment.date_limite | date:'dd/MM/yyyy' }}</p>
+            </div>
+          </div>
+
+          <div *ngIf="assignment.article_resume" class="pt-0.5 rounded-lg border border-slate-200 bg-slate-50/70 p-2.5">
+            <p class="text-[10px] font-normal uppercase tracking-wide text-slate-500">Résumé</p>
+            <p class="mt-1 text-[12px] text-slate-700 leading-5">{{ assignment.article_resume }}</p>
+          </div>
+
+          <div *ngIf="assignment.article_mots_cles" class="pt-0.5">
+            <p class="text-[10px] font-normal uppercase tracking-wide text-slate-500">Mots-clés</p>
+            <div class="mt-1 flex flex-wrap gap-1.5">
+              <span class="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-700" *ngFor="let keyword of assignment.article_mots_cles.split(',')">
+                {{ keyword.trim() }}
+              </span>
+            </div>
+          </div>
+
+          <div *ngIf="assignment.article_fichier_pdf" class="pt-0.5">
+            <a [href]="getPdfUrl(assignment.article_fichier_pdf)" target="_blank" class="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-orange-600 px-2.5 py-1.5 text-[11px] font-semibold text-white transition hover:bg-orange-700">
+              <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v4.5A2.25 2.25 0 0 1 17.25 21h-10.5A2.25 2.25 0 0 1 4.5 18.75v-4.5m3-3L12 15m0 0 4.5-3.75M12 15V3"/>
+              </svg>
+              Télécharger le PDF
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <section class="lg:col-span-7 rounded-2xl border border-slate-200/80 bg-white p-3.5 md:p-4 shadow-sm">
+        <h3 class="text-sm font-semibold text-slate-900 mb-2">Votre évaluation</h3>
+
+        <div class="mb-3 grid grid-cols-1 lg:grid-cols-2 gap-2.5">
+          <div class="rounded-xl border border-slate-200 p-2.5">
+            <h4 class="text-sm font-semibold text-slate-900 mb-1">1. Qualité scientifique *</h4>
+            <p class="text-[11px] text-slate-600 mb-2">Évaluez la rigueur méthodologique, la solidité des résultats et la pertinence scientifique.</p>
+            <div class="flex flex-wrap md:flex-nowrap items-stretch gap-1.5">
+              <button
+                class="min-w-0 flex-1 p-2 border-2 rounded-lg font-semibold transition-all"
+                *ngFor="let criteria of criteriaQualite"
+                [class]="form.score_qualite === criteria.value ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-slate-300 bg-white text-slate-700 hover:border-slate-400'"
+                (click)="form.score_qualite = criteria.value"
+              >
+                <div class="text-base leading-none">{{ criteria.value }}</div>
+                <div class="text-[10px] mt-0.5 truncate">{{ criteria.label }}</div>
+              </button>
+            </div>
+          </div>
+
+          <div class="rounded-xl border border-slate-200 p-2.5">
+            <h4 class="text-sm font-semibold text-slate-900 mb-1">2. Originalité et innovation *</h4>
+            <p class="text-[11px] text-slate-600 mb-2">Évaluez le caractère novateur de l'approche et la contribution à la recherche.</p>
+            <div class="flex flex-wrap md:flex-nowrap items-stretch gap-1.5">
+              <button
+                class="min-w-0 flex-1 p-2 border-2 rounded-lg font-semibold transition-all"
+                *ngFor="let criteria of criteriaOriginalite"
+                [class]="form.score_originalite === criteria.value ? 'border-green-500 bg-green-50 text-green-700' : 'border-slate-300 bg-white text-slate-700 hover:border-slate-400'"
+                (click)="form.score_originalite = criteria.value"
+              >
+                <div class="text-base leading-none">{{ criteria.value }}</div>
+                <div class="text-[10px] mt-0.5 truncate">{{ criteria.label }}</div>
+              </button>
+            </div>
+          </div>
+
+          <div class="rounded-xl border border-slate-200 p-2.5">
+            <h4 class="text-sm font-semibold text-slate-900 mb-1">3. Clarté et structure *</h4>
+            <p class="text-[11px] text-slate-600 mb-2">Évaluez la qualité de la rédaction, la structure et la facilité de compréhension.</p>
+            <div class="flex flex-wrap md:flex-nowrap items-stretch gap-1.5">
+              <button
+                class="min-w-0 flex-1 p-2 border-2 rounded-lg font-semibold transition-all"
+                *ngFor="let criteria of criteriaClarte"
+                [class]="form.score_clarte === criteria.value ? 'border-purple-500 bg-purple-50 text-purple-700' : 'border-slate-300 bg-white text-slate-700 hover:border-slate-400'"
+                (click)="form.score_clarte = criteria.value"
+              >
+                <div class="text-base leading-none">{{ criteria.value }}</div>
+                <div class="text-[10px] mt-0.5 truncate">{{ criteria.label }}</div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl bg-slate-50 border border-slate-200 p-2.5 mb-3" *ngIf="getAverageScore() > 0">
+          <h4 class="text-xs font-semibold text-slate-900 mb-1.5">Score moyen</h4>
+          <div class="text-xl font-bold text-white rounded-lg p-2.5 text-center" [style.background-color]="getScoreColor(getAverageScore())">
+            {{ getAverageScore().toFixed(2) }} / 5
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">Commentaires détaillés *</label>
+          <p class="text-[11px] text-slate-600 mb-1.5">Fournissez une évaluation détaillée : points forts, points faibles, suggestions d'amélioration.</p>
+          <textarea
+            [(ngModel)]="form.commentaires"
+            name="commentaires"
+            rows="6"
+            required
+            placeholder="Votre évaluation détaillée de l'article..."
+            class="textarea min-h-[120px] text-sm leading-5"
+          ></textarea>
+          <p class="text-[10px] text-slate-500 mt-1 text-right">{{ form.commentaires.length }} caractères</p>
+        </div>
+
+        <div class="mb-3 rounded-xl border border-slate-200 p-2.5 bg-slate-50/60">
+          <label class="block text-[11px] font-medium text-slate-700 mb-2">Recommandation finale *</label>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
             <button
-              class="p-3 border-2 rounded-lg font-semibold transition-all"
-              *ngFor="let criteria of criteriaQualite"
-              [class]="form.score_qualite === criteria.value ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-slate-300 bg-white text-slate-700 hover:border-slate-400'"
-              (click)="form.score_qualite = criteria.value"
+              type="button"
+              class="border-2 rounded-lg p-2.5 transition-all"
+              [class]="form.recommandation === 'accepter' ? 'border-green-500 bg-green-50' : 'border-slate-300 bg-white hover:border-green-300'"
+              (click)="form.recommandation = 'accepter'"
             >
-              <div class="text-2xl">{{ criteria.value }}</div>
-              <div class="text-xs">{{ criteria.label }}</div>
+              <div class="mb-1 flex justify-center">
+                <svg class="h-3.5 w-3.5 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>
+              </div>
+              <strong class="block text-xs text-slate-900">Accepter</strong>
+              <small class="text-[10px] text-slate-600">Article prêt pour publication</small>
+            </button>
+            <button
+              type="button"
+              class="border-2 rounded-lg p-2.5 transition-all"
+              [class]="form.recommandation === 'reviser' ? 'border-orange-500 bg-orange-50' : 'border-slate-300 bg-white hover:border-orange-300'"
+              (click)="form.recommandation = 'reviser'"
+            >
+              <div class="mb-1 flex justify-center">
+                <svg class="h-3.5 w-3.5 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 2.651 2.651M7.5 19.5l3.75-.75 8.263-8.263a1.875 1.875 0 0 0 0-2.651l-1.35-1.35a1.875 1.875 0 0 0-2.651 0L7.25 14.75 6.5 18.5l1 1Z"/></svg>
+              </div>
+              <strong class="block text-xs text-slate-900">Réviser</strong>
+              <small class="text-[10px] text-slate-600">Modifications nécessaires</small>
+            </button>
+            <button
+              type="button"
+              class="border-2 rounded-lg p-2.5 transition-all"
+              [class]="form.recommandation === 'rejeter' ? 'border-red-500 bg-red-50' : 'border-slate-300 bg-white hover:border-red-300'"
+              (click)="form.recommandation = 'rejeter'"
+            >
+              <div class="mb-1 flex justify-center">
+                <svg class="h-3.5 w-3.5 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m6 6 12 12M18 6 6 18"/></svg>
+              </div>
+              <strong class="block text-xs text-slate-900">Rejeter</strong>
+              <small class="text-[10px] text-slate-600">Article non acceptable</small>
             </button>
           </div>
         </div>
 
-        <div class="rounded-xl border border-slate-200 p-4">
-          <h4 class="font-semibold text-slate-900 mb-2">2. Originalité et innovation *</h4>
-          <p class="text-sm text-slate-600 mb-4">Évaluez le caractère novateur de l'approche et la contribution à la recherche.</p>
-          <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
-            <button
-              class="p-3 border-2 rounded-lg font-semibold transition-all"
-              *ngFor="let criteria of criteriaOriginalite"
-              [class]="form.score_originalite === criteria.value ? 'border-green-500 bg-green-50 text-green-700' : 'border-slate-300 bg-white text-slate-700 hover:border-slate-400'"
-              (click)="form.score_originalite = criteria.value"
-            >
-              <div class="text-2xl">{{ criteria.value }}</div>
-              <div class="text-xs">{{ criteria.label }}</div>
-            </button>
-          </div>
-        </div>
-
-        <div class="rounded-xl border border-slate-200 p-4">
-          <h4 class="font-semibold text-slate-900 mb-2">3. Clarté et structure *</h4>
-          <p class="text-sm text-slate-600 mb-4">Évaluez la qualité de la rédaction, la structure et la facilité de compréhension.</p>
-          <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
-            <button
-              class="p-3 border-2 rounded-lg font-semibold transition-all"
-              *ngFor="let criteria of criteriaClarte"
-              [class]="form.score_clarte === criteria.value ? 'border-purple-500 bg-purple-50 text-purple-700' : 'border-slate-300 bg-white text-slate-700 hover:border-slate-400'"
-              (click)="form.score_clarte = criteria.value"
-            >
-              <div class="text-2xl">{{ criteria.value }}</div>
-              <div class="text-xs">{{ criteria.label }}</div>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 mb-6" *ngIf="getAverageScore() > 0">
-        <h4 class="font-semibold text-slate-900 mb-2">Score moyen</h4>
-        <div class="text-3xl font-bold text-white rounded-lg p-4 text-center" [style.background-color]="getScoreColor(getAverageScore())">
-          {{ getAverageScore().toFixed(2) }} / 5
-        </div>
-      </div>
-
-      <div class="mb-6">
-        <label class="block text-sm font-medium text-slate-700 mb-2">Commentaires détaillés *</label>
-        <p class="text-sm text-slate-600 mb-2">Fournissez une évaluation détaillée : points forts, points faibles, suggestions d'amélioration.</p>
-        <textarea
-          [(ngModel)]="form.commentaires"
-          name="commentaires"
-          rows="10"
-          required
-          placeholder="Votre évaluation détaillée de l'article..."
-          class="textarea"
-        ></textarea>
-        <p class="text-sm text-slate-500 mt-1">{{ form.commentaires.length }} caractères</p>
-      </div>
-
-      <div class="mb-6">
-        <label class="block text-sm font-medium text-slate-700 mb-3">Recommandation finale *</label>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <button
-            type="button"
-            class="border-2 rounded-lg p-4 transition-all"
-            [class]="form.recommandation === 'accepter' ? 'border-green-500 bg-green-50' : 'border-slate-300 bg-white hover:border-green-300'"
-            (click)="form.recommandation = 'accepter'"
-          >
-            <div class="mb-2 flex justify-center">
-              <svg class="h-5 w-5 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>
+        <div class="rounded-xl bg-slate-50 border border-slate-200 p-2.5 mb-3" *ngIf="form.recommandation">
+          <h4 class="text-xs font-semibold text-slate-900 mb-2">Résumé de votre évaluation</h4>
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-2">
+            <div class="bg-white rounded-lg p-2 text-center border border-blue-200">
+              <p class="text-base font-bold text-blue-600 leading-none">{{ form.score_qualite }}</p>
+              <p class="text-[10px] text-slate-600 mt-1">Qualité</p>
             </div>
-            <strong class="block text-slate-900">Accepter</strong>
-            <small class="text-slate-600">Article prêt pour publication</small>
-          </button>
-          <button
-            type="button"
-            class="border-2 rounded-lg p-4 transition-all"
-            [class]="form.recommandation === 'reviser' ? 'border-orange-500 bg-orange-50' : 'border-slate-300 bg-white hover:border-orange-300'"
-            (click)="form.recommandation = 'reviser'"
-          >
-            <div class="mb-2 flex justify-center">
-              <svg class="h-5 w-5 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 2.651 2.651M7.5 19.5l3.75-.75 8.263-8.263a1.875 1.875 0 0 0 0-2.651l-1.35-1.35a1.875 1.875 0 0 0-2.651 0L7.25 14.75 6.5 18.5l1 1Z"/></svg>
+            <div class="bg-white rounded-lg p-2 text-center border border-green-200">
+              <p class="text-base font-bold text-green-600 leading-none">{{ form.score_originalite }}</p>
+              <p class="text-[10px] text-slate-600 mt-1">Originalité</p>
             </div>
-            <strong class="block text-slate-900">Réviser</strong>
-            <small class="text-slate-600">Modifications nécessaires</small>
-          </button>
-          <button
-            type="button"
-            class="border-2 rounded-lg p-4 transition-all"
-            [class]="form.recommandation === 'rejeter' ? 'border-red-500 bg-red-50' : 'border-slate-300 bg-white hover:border-red-300'"
-            (click)="form.recommandation = 'rejeter'"
-          >
-            <div class="mb-2 flex justify-center">
-              <svg class="h-5 w-5 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m6 6 12 12M18 6 6 18"/></svg>
+            <div class="bg-white rounded-lg p-2 text-center border border-purple-200">
+              <p class="text-base font-bold text-purple-600 leading-none">{{ form.score_clarte }}</p>
+              <p class="text-[10px] text-slate-600 mt-1">Clarté</p>
             </div>
-            <strong class="block text-slate-900">Rejeter</strong>
-            <small class="text-slate-600">Article non acceptable</small>
-          </button>
-        </div>
-      </div>
-
-      <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 mb-6" *ngIf="form.recommandation">
-        <h4 class="font-semibold text-slate-900 mb-4">Résumé de votre évaluation</h4>
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4">
-          <div class="bg-white rounded-lg p-3 text-center border border-blue-200">
-            <p class="text-base font-bold text-blue-600">{{ form.score_qualite }}</p>
-            <p class="text-xs text-slate-600">Qualité</p>
+            <div class="bg-white rounded-lg p-2 text-center border-2" [style.border-color]="getScoreColor(getAverageScore())">
+              <p class="text-base font-bold leading-none" [style.color]="getScoreColor(getAverageScore())">{{ getAverageScore().toFixed(2) }}</p>
+              <p class="text-[10px] text-slate-600 mt-1">Moyenne</p>
+            </div>
           </div>
-          <div class="bg-white rounded-lg p-3 text-center border border-green-200">
-            <p class="text-base font-bold text-green-600">{{ form.score_originalite }}</p>
-            <p class="text-xs text-slate-600">Originalité</p>
-          </div>
-          <div class="bg-white rounded-lg p-3 text-center border border-purple-200">
-            <p class="text-base font-bold text-purple-600">{{ form.score_clarte }}</p>
-            <p class="text-xs text-slate-600">Clarté</p>
-          </div>
-          <div class="bg-white rounded-lg p-3 text-center border-2" [style.border-color]="getScoreColor(getAverageScore())">
-            <p class="text-base font-bold" [style.color]="getScoreColor(getAverageScore())">{{ getAverageScore().toFixed(2) }}</p>
-            <p class="text-xs text-slate-600">Moyenne</p>
-          </div>
-          <div class="rounded-lg p-3 text-center" [style.background-color]="getRecommendationColor(form.recommandation) + '20'">
-            <p class="font-bold text-white text-xs px-2 py-1 rounded" [style.background-color]="getRecommendationColor(form.recommandation)">
+          <div class="mt-2.5 text-right">
+            <span class="inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-bold text-white" [style.background-color]="getRecommendationColor(form.recommandation)">
               {{ getRecommendationLabel(form.recommandation) }}
-            </p>
+            </span>
           </div>
         </div>
-      </div>
 
-      <div class="flex gap-3 justify-end pt-4 border-t border-slate-200">
-        <button class="btn btn-secondary text-xs" (click)="cancel()">Annuler</button>
-        <button
-          class="btn btn-primary text-xs disabled:opacity-50 disabled:cursor-not-allowed"
-          (click)="submitReview()"
-          [disabled]="!form.commentaires || !form.recommandation || form.score_qualite === 0 || form.score_originalite === 0 || form.score_clarte === 0"
-        >
-          {{ isEditMode ? 'Mettre à jour' : "Soumettre l'évaluation" }}
-        </button>
-      </div>
+        <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-200">
+          <button class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-50" (click)="cancel()">Annuler</button>
+          <button
+            class="inline-flex items-center justify-center rounded-lg bg-orange-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            (click)="submitReview()"
+            [disabled]="!form.commentaires || !form.recommandation || form.score_qualite === 0 || form.score_originalite === 0 || form.score_clarte === 0"
+          >
+            {{ isEditMode ? 'Mettre à jour' : "Soumettre l'évaluation" }}
+          </button>
+        </div>
+      </section>
     </div>
 
-    <div class="card card-body text-center py-14" *ngIf="!assignment">
+    <div class="rounded-2xl border border-slate-200/80 bg-white p-10 text-center shadow-sm" *ngIf="!assignment">
       <h3 class="text-sm font-semibold text-slate-900 mb-2">Aucune assignation</h3>
       <p class="text-slate-600 mb-5 text-sm">Aucune assignation sélectionnée. Veuillez retourner à la page des assignations pour en choisir une.</p>
       <div>

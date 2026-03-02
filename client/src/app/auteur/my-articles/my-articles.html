@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 px-4 py-8 sm:px-6 lg:px-8">
+<div class="min-h-screen bg-gradient-to-b from-orange-50 via-amber-50 to-orange-50 px-4 py-8 sm:px-6 lg:px-8">
 	<div class="app-container">
 		<div class="mb-6">
 			<h1 class="text-base font-semibold text-slate-900 mb-1">Mes Articles</h1>
@@ -49,7 +49,7 @@
 										*ngFor="let kw of filteredKeywords" 
 										class="px-3 py-1.5 rounded-lg border text-sm font-medium transition-colors"
 										[class]="isKeywordSelected(kw) 
-											? 'bg-primary-50 border-primary-300 text-primary-700' 
+												? 'bg-orange-50 border-orange-300 text-orange-700'
 											: 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'"
 										(click)="toggleKeyword(kw)">
 							{{ kw }}
@@ -64,7 +64,7 @@
 						<span class="font-medium">PDF actuel :</span> 
 						<a [href]="getPdfUrl(form.fichier_pdf)" target="_blank" class="text-sky-600 hover:text-sky-700 underline ml-1">Voir</a>
 					</div>
-					<input type="file" (change)="onFileSelected($event)" accept=".pdf" class="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700" />
+					<input type="file" (change)="onFileSelected($event)" accept=".pdf" class="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700" />
 					<small class="text-slate-600 mt-2" *ngIf="selectedFile">{{ selectedFile.name }}</small>
 				</div>
 
@@ -113,7 +113,7 @@
 						</div>
 					</div>
 					<div class="flex items-center gap-2 shrink-0">
-						<a *ngIf="a.fichier_pdf" [href]="getPdfUrl(a.fichier_pdf)" target="_blank" class="text-primary-600 hover:text-primary-700 font-medium text-sm">PDF</a>
+						<a *ngIf="a.fichier_pdf" [href]="getPdfUrl(a.fichier_pdf)" target="_blank" class="text-orange-600 hover:text-orange-700 font-medium text-sm">PDF</a>
 						<button class="btn btn-ghost text-xs py-1.5" (click)="edit(a)" title="Modifier">Modifier</button>
 						<button class="btn btn-ghost text-xs py-1.5" (click)="showArticleHistory(a)" title="Historique">Historique</button>
 						<button class="btn btn-danger text-xs py-1.5" (click)="remove(a)" title="Supprimer">Supprimer</button>
@@ -154,7 +154,7 @@
 							<span *ngIf="getArticleRating(a.id_article) === null" class="text-slate-400">-</span>
 						</td>
 						<td>
-							<a *ngIf="a.fichier_pdf" [href]="getPdfUrl(a.fichier_pdf)" target="_blank" class="text-primary-600 hover:text-primary-700">PDF</a>
+							<a *ngIf="a.fichier_pdf" [href]="getPdfUrl(a.fichier_pdf)" target="_blank" class="text-orange-600 hover:text-orange-700">PDF</a>
 							<span *ngIf="!a.fichier_pdf" class="text-slate-400">-</span>
 						</td>
 						<td>

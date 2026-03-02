@@ -1,128 +1,128 @@
-<aside *ngIf="role" class="hidden lg:flex fixed left-0 top-0 z-40 h-screen w-[12.6rem] flex-col border-r border-orange-100 bg-gradient-to-b from-orange-50/95 via-amber-50/80 to-white/95 backdrop-blur-sm">
-  <div class="px-3 pt-3 pb-2 border-b border-orange-100/70">
+<aside *ngIf="role" class="hidden lg:flex fixed left-0 top-0 z-40 h-screen w-[12.6rem] flex-col border-r border-slate-200 bg-white">
+  <div class="px-3 pt-3 pb-2 border-b border-slate-200">
     <div class="flex items-center gap-3">
-      <div class="flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-white shadow-sm ring-1 ring-orange-200/70">
+      <div class="flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-white border border-slate-200 shadow-lg">
         <img src="/images/logo.png" alt="PeerConnect logo" class="h-7 w-7 object-contain" />
       </div>
       <p class="text-sm font-semibold tracking-tight text-slate-900">PeerConnect</p>
     </div>
-    <div class="mt-2 inline-flex items-center rounded-full bg-orange-100/80 px-1.5 py-0 text-[10px] font-semibold text-orange-800 ring-1 ring-orange-200/70">
-      {{ role === 'admin' ? 'Espace Administrateur' : role === 'expert' ? 'Espace Expert' : 'Espace Auteur' }}
+    <div class="mt-2 inline-flex items-center rounded-full bg-orange-100 px-1.5 py-0 text-[10px] font-semibold text-orange-700 ring-1 ring-orange-200">
+      {{ role === 'admin' ? 'Admin' : role === 'expert' ? 'Expert' : 'Author' }}
     </div>
   </div>
 
   <div class="flex-1 flex items-center px-2">
-    <nav class="w-full space-y-0.5 text-xs font-medium text-slate-700">
+    <nav class="w-full space-y-0.5 text-xs font-medium text-slate-600">
       <ng-container *ngIf="role === 'auteur'">
-        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/auteur" [routerLinkActiveOptions]="{exact: true}">
-          <svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 14 21v-5.25a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 3 21V10.5Z"/></svg><span>Acceuille</span>
+        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/auteur" [routerLinkActiveOptions]="{exact: true}">
+          <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 14 21v-5.25a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 3 21V10.5Z"/></svg><span>Home</span>
         </a>
-        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/submit-article">
-          <svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 2.651 2.651M7.5 19.5l3.75-.75 8.263-8.263a1.875 1.875 0 0 0 0-2.651l-1.35-1.35a1.875 1.875 0 0 0-2.651 0L7.25 14.75 6.5 18.5l1 1Z"/></svg><span>Soumettre un article</span>
+        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/submit-article">
+          <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 2.651 2.651M7.5 19.5l3.75-.75 8.263-8.263a1.875 1.875 0 0 0 0-2.651l-1.35-1.35a1.875 1.875 0 0 0-2.651 0L7.25 14.75 6.5 18.5l1 1Z"/></svg><span>Submit</span>
         </a>
-        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/my-articles">
-          <svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 5.25A2.25 2.25 0 0 1 6.75 3h10.5A2.25 2.25 0 0 1 19.5 5.25v13.5A2.25 2.25 0 0 1 17.25 21H6.75A2.25 2.25 0 0 1 4.5 18.75V5.25Zm4.5 2.25h6m-6 4.5h6m-6 4.5h4.5"/></svg><span>Mes articles</span>
+        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/my-articles">
+          <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 5.25A2.25 2.25 0 0 1 6.75 3h10.5A2.25 2.25 0 0 1 19.5 5.25v13.5A2.25 2.25 0 0 1 17.25 21H6.75A2.25 2.25 0 0 1 4.5 18.75V5.25Zm4.5 2.25h6m-6 4.5h6m-6 4.5h4.5"/></svg><span>Articles</span>
         </a>
-        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/profile">
-          <svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75a17.933 17.933 0 0 1-7.5-1.632Z"/></svg><span>Profil</span>
+        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/profile">
+          <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75a17.933 17.933 0 0 1-7.5-1.632Z"/></svg><span>Profile</span>
         </a>
       </ng-container>
 
       <ng-container *ngIf="role === 'expert'">
-        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/expert" [routerLinkActiveOptions]="{exact: true}">
-          <svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 14 21v-5.25a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 3 21V10.5Z"/></svg><span>Acceuille</span>
+        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/expert" [routerLinkActiveOptions]="{exact: true}">
+          <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 14 21v-5.25a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 3 21V10.5Z"/></svg><span>Home</span>
         </a>
-        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/expert/assignments">
-          <svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5.25A2.25 2.25 0 0 1 11.25 3h1.5A2.25 2.25 0 0 1 15 5.25H18a2.25 2.25 0 0 1 2.25 2.25v11.25A2.25 2.25 0 0 1 18 21H6a2.25 2.25 0 0 1-2.25-2.25V7.5A2.25 2.25 0 0 1 6 5.25h3Zm-1.5 6h9m-9 4.5h6"/></svg><span>Mes Assignations</span>
+        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/expert/assignments">
+          <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5.25A2.25 2.25 0 0 1 11.25 3h1.5A2.25 2.25 0 0 1 15 5.25H18a2.25 2.25 0 0 1 2.25 2.25v11.25A2.25 2.25 0 0 1 18 21H6a2.25 2.25 0 0 1-2.25-2.25V7.5A2.25 2.25 0 0 1 6 5.25h3Zm-1.5 6h9m-9 4.5h6"/></svg><span>Assignments</span>
         </a>
-        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/expert/submit-review">
-          <svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 2.651 2.651M7.5 19.5l3.75-.75 8.263-8.263a1.875 1.875 0 0 0 0-2.651l-1.35-1.35a1.875 1.875 0 0 0-2.651 0L7.25 14.75 6.5 18.5l1 1Z"/></svg><span>Soumettre un review</span>
+        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/expert/submit-review">
+          <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 2.651 2.651M7.5 19.5l3.75-.75 8.263-8.263a1.875 1.875 0 0 0 0-2.651l-1.35-1.35a1.875 1.875 0 0 0-2.651 0L7.25 14.75 6.5 18.5l1 1Z"/></svg><span>Review</span>
         </a>
-        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/expert/profile">
-          <svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75a17.933 17.933 0 0 1-7.5-1.632Z"/></svg><span>Profil</span>
+        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/expert/profile">
+          <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75a17.933 17.933 0 0 1-7.5-1.632Z"/></svg><span>Profile</span>
         </a>
       </ng-container>
 
       <ng-container *ngIf="role === 'admin'">
-        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/admin" [routerLinkActiveOptions]="{exact: true}">
-          <svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 14 21v-5.25a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 3 21V10.5Z"/></svg><span>Acceuille</span>
+        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/admin" [routerLinkActiveOptions]="{exact: true}">
+          <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 14 21v-5.25a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 3 21V10.5Z"/></svg><span>Home</span>
         </a>
-        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/admin/manage-experts">
-          <svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a8.966 8.966 0 0 1-6 2.28 8.966 8.966 0 0 1-6-2.28M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Zm6 2.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"/></svg><span>Gérer les experts</span>
+        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/admin/manage-experts">
+          <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a8.966 8.966 0 0 1-6 2.28 8.966 8.966 0 0 1-6-2.28M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Zm6 2.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"/></svg><span>Experts</span>
         </a>
-        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/admin/workflow">
-          <svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9m-9 6h9m-9 6h9M4.5 6h.008v.008H4.5V6Zm0 6h.008v.008H4.5V12Zm0 6h.008v.008H4.5V18Z"/></svg><span>Workflow articles</span>
+        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/admin/workflow">
+          <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9m-9 6h9m-9 6h9M4.5 6h.008v.008H4.5V6Zm0 6h.008v.008H4.5V12Zm0 6h.008v.008H4.5V18Z"/></svg><span>Workflow</span>
         </a>
-        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/admin/users">
-          <svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a8.966 8.966 0 0 1-6 2.28 8.966 8.966 0 0 1-6-2.28M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Zm6 2.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-19.5 0a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0Z"/></svg><span>Tous les utilisateurs</span>
+        <a class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/admin/users">
+          <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a8.966 8.966 0 0 1-6 2.28 8.966 8.966 0 0 1-6-2.28M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Zm6 2.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-19.5 0a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0Z"/></svg><span>Users</span>
         </a>
       </ng-container>
     </nav>
   </div>
 
-  <div class="px-2.5 pb-3 pt-2 border-t border-orange-100/70 space-y-1.5">
-    <span class="inline-flex w-full items-center rounded-lg bg-white/80 px-2 py-1 text-[11px] text-slate-600 border border-orange-200/70" *ngIf="userName">{{ userName }}</span>
-    <button class="btn w-full bg-slate-900 hover:bg-slate-800 text-white justify-center py-1 text-[11px]" (click)="logout()">Déconnexion</button>
+  <div class="px-2.5 pb-3 pt-2 border-t border-slate-200 space-y-1.5">
+    <span class="inline-flex w-full items-center rounded-lg bg-slate-100 px-2 py-1 text-[11px] text-slate-600 border border-slate-200" *ngIf="userName">{{ userName }}</span>
+    <button class="btn w-full bg-orange-600 hover:bg-orange-700 text-white justify-center py-1 text-[11px]" (click)="logout()">Sign Out</button>
   </div>
 </aside>
 
-<div *ngIf="role" class="lg:hidden sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-sm">
+<div *ngIf="role" class="lg:hidden sticky top-0 z-50 border-b border-slate-200 bg-white">
   <div class="flex h-16 items-center justify-between px-4">
     <div class="flex items-center gap-3">
-      <div class="flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-white ring-1 ring-slate-200">
+      <div class="flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-white border border-slate-200">
         <img src="/images/logo.png" alt="PeerConnect logo" class="h-7 w-7 object-contain" />
       </div>
       <p class="text-base font-semibold text-slate-900">PeerConnect</p>
     </div>
-    <button class="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-700 shadow-sm" (click)="toggleMobile()">
+    <button class="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 px-3 py-2 text-slate-600" (click)="toggleMobile()">
       <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5m-16.5 5.25h16.5m-16.5 5.25h16.5"/></svg>
     </button>
   </div>
 </div>
 
 <div *ngIf="role && mobileOpen" class="lg:hidden fixed inset-0 z-[60]">
-  <div class="absolute inset-0 bg-slate-900/40" (click)="toggleMobile()"></div>
-  <aside class="absolute left-0 top-0 h-full w-64 bg-gradient-to-b from-orange-50/95 via-amber-50/85 to-white shadow-2xl border-r border-orange-100 animate-slide-down flex flex-col">
-    <div class="px-4 pt-4 pb-3 border-b border-orange-100/70">
+  <div class="absolute inset-0 bg-black/40" (click)="toggleMobile()"></div>
+  <aside class="absolute left-0 top-0 h-full w-64 bg-white shadow-2xl border-r border-slate-200 animate-slide-down flex flex-col">
+    <div class="px-4 pt-4 pb-3 border-b border-slate-200">
       <div class="flex items-center gap-3">
-        <div class="flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-white ring-1 ring-slate-200">
+        <div class="flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-white border border-slate-200">
           <img src="/images/logo.png" alt="PeerConnect logo" class="h-7 w-7 object-contain" />
         </div>
         <p class="text-base font-semibold text-slate-900">PeerConnect</p>
       </div>
-      <div class="mt-2 inline-flex items-center rounded-full bg-orange-100/80 px-2 py-0.5 text-[11px] font-semibold text-orange-800 ring-1 ring-orange-200/70">
-        {{ role === 'admin' ? 'Espace Administrateur' : role === 'expert' ? 'Espace Expert' : 'Espace Auteur' }}
+      <div class="mt-2 inline-flex items-center rounded-full bg-orange-100 px-2 py-0.5 text-[11px] font-semibold text-orange-700 ring-1 ring-orange-200">
+        {{ role === 'admin' ? 'Admin' : role === 'expert' ? 'Expert' : 'Author' }}
       </div>
     </div>
 
     <div class="flex-1 flex items-center px-2.5">
-      <nav class="w-full space-y-1 text-[13px] font-semibold text-slate-700">
+      <nav class="w-full space-y-1 text-[13px] font-semibold text-slate-600">
         <ng-container *ngIf="role === 'auteur'">
-          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/auteur" [routerLinkActiveOptions]="{exact: true}"><svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 14 21v-5.25a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 3 21V10.5Z"/></svg><span>Acceuille</span></a>
-          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/submit-article"><svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 2.651 2.651M7.5 19.5l3.75-.75 8.263-8.263a1.875 1.875 0 0 0 0-2.651l-1.35-1.35a1.875 1.875 0 0 0-2.651 0L7.25 14.75 6.5 18.5l1 1Z"/></svg><span>Soumettre un article</span></a>
-          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/my-articles"><svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 5.25A2.25 2.25 0 0 1 6.75 3h10.5A2.25 2.25 0 0 1 19.5 5.25v13.5A2.25 2.25 0 0 1 17.25 21H6.75A2.25 2.25 0 0 1 4.5 18.75V5.25Zm4.5 2.25h6m-6 4.5h6m-6 4.5h4.5"/></svg><span>Mes articles</span></a>
-          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/profile"><svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75a17.933 17.933 0 0 1-7.5-1.632Z"/></svg><span>Profil</span></a>
+          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/auteur" [routerLinkActiveOptions]="{exact: true}"><svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 14 21v-5.25a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 3 21V10.5Z"/></svg><span>Home</span></a>
+          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/submit-article"><svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 2.651 2.651M7.5 19.5l3.75-.75 8.263-8.263a1.875 1.875 0 0 0 0-2.651l-1.35-1.35a1.875 1.875 0 0 0-2.651 0L7.25 14.75 6.5 18.5l1 1Z"/></svg><span>Submit</span></a>
+          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/my-articles"><svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 5.25A2.25 2.25 0 0 1 6.75 3h10.5A2.25 2.25 0 0 1 19.5 5.25v13.5A2.25 2.25 0 0 1 17.25 21H6.75A2.25 2.25 0 0 1 4.5 18.75V5.25Zm4.5 2.25h6m-6 4.5h6m-6 4.5h4.5"/></svg><span>Articles</span></a>
+          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/auteur/profile"><svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75a17.933 17.933 0 0 1-7.5-1.632Z"/></svg><span>Profile</span></a>
         </ng-container>
 
         <ng-container *ngIf="role === 'expert'">
-          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/expert" [routerLinkActiveOptions]="{exact: true}"><svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 14 21v-5.25a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 3 21V10.5Z"/></svg><span>Acceuille</span></a>
-          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/expert/assignments"><svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5.25A2.25 2.25 0 0 1 11.25 3h1.5A2.25 2.25 0 0 1 15 5.25H18a2.25 2.25 0 0 1 2.25 2.25v11.25A2.25 2.25 0 0 1 18 21H6a2.25 2.25 0 0 1-2.25-2.25V7.5A2.25 2.25 0 0 1 6 5.25h3Zm-1.5 6h9m-9 4.5h6"/></svg><span>Mes Assignations</span></a>
-          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/expert/submit-review"><svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 2.651 2.651M7.5 19.5l3.75-.75 8.263-8.263a1.875 1.875 0 0 0 0-2.651l-1.35-1.35a1.875 1.875 0 0 0-2.651 0L7.25 14.75 6.5 18.5l1 1Z"/></svg><span>Soumettre un review</span></a>
-          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/expert/profile"><svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75a17.933 17.933 0 0 1-7.5-1.632Z"/></svg><span>Profil</span></a>
+          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/expert" [routerLinkActiveOptions]="{exact: true}"><svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 14 21v-5.25a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 3 21V10.5Z"/></svg><span>Home</span></a>
+          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/expert/assignments"><svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5.25A2.25 2.25 0 0 1 11.25 3h1.5A2.25 2.25 0 0 1 15 5.25H18a2.25 2.25 0 0 1 2.25 2.25v11.25A2.25 2.25 0 0 1 18 21H6a2.25 2.25 0 0 1-2.25-2.25V7.5A2.25 2.25 0 0 1 6 5.25h3Zm-1.5 6h9m-9 4.5h6"/></svg><span>Assignments</span></a>
+          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/expert/submit-review"><svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 2.651 2.651M7.5 19.5l3.75-.75 8.263-8.263a1.875 1.875 0 0 0 0-2.651l-1.35-1.35a1.875 1.875 0 0 0-2.651 0L7.25 14.75 6.5 18.5l1 1Z"/></svg><span>Review</span></a>
+          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/expert/profile"><svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75a17.933 17.933 0 0 1-7.5-1.632Z"/></svg><span>Profile</span></a>
         </ng-container>
 
         <ng-container *ngIf="role === 'admin'">
-          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/admin" [routerLinkActiveOptions]="{exact: true}"><svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 14 21v-5.25a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 3 21V10.5Z"/></svg><span>Acceuille</span></a>
-          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/admin/manage-experts"><svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a8.966 8.966 0 0 1-6 2.28 8.966 8.966 0 0 1-6-2.28M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Zm6 2.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"/></svg><span>Gérer les experts</span></a>
-          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/admin/workflow"><svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9m-9 6h9m-9 6h9M4.5 6h.008v.008H4.5V6Zm0 6h.008v.008H4.5V12Zm0 6h.008v.008H4.5V18Z"/></svg><span>Workflow articles</span></a>
-          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-orange-100/70" [routerLinkActive]="getActiveClasses()" routerLink="/admin/users"><svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a8.966 8.966 0 0 1-6 2.28 8.966 8.966 0 0 1-6-2.28M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Zm6 2.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-19.5 0a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0Z"/></svg><span>Tous les utilisateurs</span></a>
+          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/admin" [routerLinkActiveOptions]="{exact: true}"><svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 14 21v-5.25a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75h-5.5A.75.75 0 0 1 3 21V10.5Z"/></svg><span>Home</span></a>
+          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/admin/manage-experts"><svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a8.966 8.966 0 0 1-6 2.28 8.966 8.966 0 0 1-6-2.28M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Zm6 2.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"/></svg><span>Experts</span></a>
+          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/admin/workflow"><svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9m-9 6h9m-9 6h9M4.5 6h.008v.008H4.5V6Zm0 6h.008v.008H4.5V12Zm0 6h.008v.008H4.5V18Z"/></svg><span>Workflow</span></a>
+          <a class="flex items-center gap-2.5 rounded-lg px-3 py-2 transition hover:bg-slate-100 text-slate-600 hover:text-slate-900" [routerLinkActive]="getActiveClasses()" routerLink="/admin/users"><svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a8.966 8.966 0 0 1-6 2.28 8.966 8.966 0 0 1-6-2.28M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Zm6 2.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-19.5 0a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0Z"/></svg><span>Users</span></a>
         </ng-container>
       </nav>
     </div>
 
-    <div class="px-3 pb-4 pt-3 border-t border-orange-100/70 space-y-2">
-      <span class="inline-flex w-full items-center rounded-lg bg-white/80 px-2.5 py-1.5 text-xs text-slate-600 border border-orange-200/70" *ngIf="userName">{{ userName }}</span>
-      <button class="btn w-full bg-slate-900 hover:bg-slate-800 text-white justify-center" (click)="logout()">Déconnexion</button>
+    <div class="px-3 pb-4 pt-3 border-t border-slate-200 space-y-2">
+      <span class="inline-flex w-full items-center rounded-lg bg-slate-100 px-2.5 py-1.5 text-xs text-slate-600 border border-slate-200" *ngIf="userName">{{ userName }}</span>
+      <button class="btn w-full bg-orange-600 hover:bg-orange-700 text-white justify-center" (click)="logout()">Sign Out</button>
     </div>
   </aside>
 </div>

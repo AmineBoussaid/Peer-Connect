@@ -1,51 +1,161 @@
-<div class="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12">
-  <div class="w-full max-w-md">
-    <div class="card card-body">
-      <div class="text-center mb-7">
-        <div class="mx-auto h-14 w-14 rounded-xl bg-white flex items-center justify-center shadow-sm ring-1 ring-slate-200 overflow-hidden">
-          <img src="/images/logo.png" alt="PeerConnect logo" class="h-10 w-10 object-contain" />
+<div class="grid lg:grid-cols-2 min-h-screen bg-white">
+  <!-- Left Side: Presentation Section -->
+  <section class="hidden lg:flex lg:flex-col lg:justify-between lg:p-12 bg-gradient-to-br from-slate-50 via-white to-slate-100">
+    <div>
+      <!-- Logo -->
+      <div class="inline-flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-4 py-3 shadow-sm mb-12">
+        <div class="h-10 w-10 rounded-lg bg-white border border-slate-200 p-1.5">
+          <img src="/images/logo.png" alt="PeerConnect" class="w-full h-full object-contain" />
         </div>
-        <h1 class="mt-4 text-2xl font-semibold text-slate-900">Créer un compte</h1>
-        <p class="mt-1 text-sm text-slate-600">Rejoignez PeerConnect en quelques étapes</p>
-      </div>
-
-      <div class="space-y-5">
         <div>
-          <label class="block text-sm font-semibold text-slate-900 mb-2">Nom complet</label>
-          <input type="text" [(ngModel)]="nom" placeholder="Votre nom"
-                 class="input" />
-        </div>
-
-        <div>
-          <label class="block text-sm font-semibold text-slate-900 mb-2">Email</label>
-          <input type="email" [(ngModel)]="email" placeholder="votre@email.com"
-                 class="input" />
-        </div>
-
-        <div>
-          <label class="block text-sm font-semibold text-slate-900 mb-2">Mot de passe</label>
-          <input type="password" [(ngModel)]="password" placeholder="••••••••"
-                 class="input" />
-        </div>
-
-        <div>
-          <label class="block text-sm font-semibold text-slate-900 mb-2">Rôle</label>
-          <select [(ngModel)]="role" class="select">
-            <option value="auteur">Auteur</option>
-            <option value="expert">Expert</option>
-          </select>
+          <p class="text-sm font-bold text-slate-900 tracking-tight">PeerConnect</p>
+          <p class="text-xs text-slate-500">Research Collaboration</p>
         </div>
       </div>
 
-      <button (click)="register()"
-              class="btn btn-primary w-full mt-7 font-semibold">
-        Créer le compte
-      </button>
+      <!-- Main Message -->
+      <h1 class="text-4xl font-bold text-slate-900 mb-4 leading-tight">
+        Join Our Research Community
+      </h1>
+      <p class="text-lg text-slate-600 leading-relaxed mb-8 max-w-lg">
+        Create your account to participate in peer review, submit papers, and collaborate with researchers globally.
+      </p>
 
-      <div class="mt-5 text-center">
-        <p class="text-sm text-slate-600">Déjà inscrit ?</p>
-        <a (click)="goLogin()" class="text-sm font-semibold text-primary-600 hover:text-primary-700 transition cursor-pointer">Se connecter</a>
-      </div>
+      <!-- Feature List -->
+      <ul class="space-y-3">
+        <li class="flex items-center gap-3 text-slate-700">
+          <svg class="w-5 h-5 text-orange-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+          <span>Submit papers for peer review</span>
+        </li>
+        <li class="flex items-center gap-3 text-slate-700">
+          <svg class="w-5 h-5 text-orange-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+          <span>Review papers as an expert</span>
+        </li>
+        <li class="flex items-center gap-3 text-slate-700">
+          <svg class="w-5 h-5 text-orange-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+          <span>Connect with academic peers worldwide</span>
+        </li>
+      </ul>
     </div>
-  </div>
+
+    <!-- Bottom Accent -->
+    <div class="pt-8">
+      <div class="w-12 h-1 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
+    </div>
+  </section>
+
+  <!-- Right Side: Registration Form -->
+    <section class="flex items-center justify-center px-4 py-8 sm:px-6 md:px-8 lg:p-12">
+      <div class="w-full max-w-sm">
+        <!-- Form Card -->
+        <div class="rounded-xl border border-slate-200 bg-white p-8 shadow-lg">
+          <!-- Header -->
+          <h2 class="text-2xl font-bold text-slate-900 mb-2">Create Account</h2>
+          <p class="text-sm text-slate-600 mb-6">Join researchers worldwide in advancing peer review</p>
+
+          <!-- Form -->
+          <form class="space-y-4">
+            <!-- Full Name Field -->
+            <div>
+              <label class="block text-sm font-medium text-slate-900 mb-2">Full Name</label>
+              <input
+                type="text"
+                [(ngModel)]="nom"
+                name="nom"
+                placeholder="Dr. Jane Smith"
+                class="input w-full"
+              />
+            </div>
+
+            <!-- Email Field -->
+            <div>
+              <label class="block text-sm font-medium text-slate-900 mb-2">Email Address</label>
+              <input
+                type="email"
+                [(ngModel)]="email"
+                name="email"
+                placeholder="your@email.com"
+                class="input w-full"
+              />
+            </div>
+
+            <!-- Password Field -->
+            <div>
+              <label class="block text-sm font-medium text-slate-900 mb-2">Password</label>
+              <input
+                type="password"
+                [(ngModel)]="password"
+                name="password"
+                placeholder="••••••••"
+                class="input w-full"
+              />
+              <p class="text-xs text-slate-500 mt-1.5">At least 8 characters recommended</p>
+            </div>
+
+            <!-- Role Selection -->
+            <div>
+              <label class="block text-sm font-medium text-slate-900 mb-2">I want to join as</label>
+              <select
+                [(ngModel)]="role"
+                name="role"
+                class="input w-full"
+              >
+                <option value="">Select your role</option>
+                <option value="auteur">Author - Submit and track papers</option>
+                <option value="expert">Expert Reviewer - Evaluate papers</option>
+              </select>
+            </div>
+
+            <!-- Sign Up Button -->
+            <button
+              type="button"
+              (click)="register()"
+              class="w-full mt-6 px-4 py-2.5 rounded-lg bg-orange-600 hover:bg-orange-700 text-white font-semibold transition shadow-md"
+            >
+              Create Account
+            </button>
+          </form>
+
+          <!-- Divider -->
+          <div class="relative my-6">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-slate-200"></div>
+            </div>
+            <div class="relative flex justify-center text-xs">
+              <span class="px-2 bg-white text-slate-500">Already have an account?</span>
+            </div>
+          </div>
+
+          <!-- Sign In Link -->
+          <a
+            routerLink="/auth/login"
+            class="w-full block text-center px-4 py-2.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-900 font-semibold transition"
+          >
+            Sign In
+          </a>
+
+          <!-- Terms -->
+          <p class="text-xs text-slate-500 text-center mt-6">
+            By creating an account, you agree to our Terms of Service and Privacy Policy.
+          </p>
+        </div>
+
+        <!-- Mobile Logo -->
+        <div class="lg:hidden mt-6 text-center">
+          <div class="inline-flex items-center justify-center gap-2 text-slate-600 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 p-1">
+              <img src="/images/logo.png" alt="PeerConnect" class="w-full h-full object-contain" />
+            </div>
+            <span class="font-semibold text-slate-900">PeerConnect</span>
+          </div>
+          <p class="text-xs text-slate-500">Research Collaboration Platform</p>
+        </div>
+      </div>
+    </section>
 </div>
